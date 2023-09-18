@@ -28,6 +28,7 @@ class SignUp extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: TextField(
+              controller: nameCont,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0)),
@@ -46,7 +47,7 @@ class SignUp extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: TextField(
-              controller: nameCont,
+              controller: emailCont,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0)),
@@ -65,6 +66,7 @@ class SignUp extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: TextField(
+              controller: passCont,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.0)),
@@ -84,7 +86,10 @@ class SignUp extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-                padding: const EdgeInsets.all(16.0),
+
+                padding: EdgeInsets.all(16.0),
+                backgroundColor: Colors.blue, // Background color
+                textStyle: TextStyle(color: Colors.white), // Text color
               ),
               child: const Text("Sign Up"), // Button text
             ),
