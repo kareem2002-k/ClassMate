@@ -13,6 +13,7 @@ class SignUp extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Sign Up"),
         centerTitle: true,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -41,7 +42,7 @@ class SignUp extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
               child: Text(
-                "Email",
+                "E-mail",
                 style: TextStyle(fontSize: 18),
               ),
             ),
@@ -52,7 +53,7 @@ class SignUp extends StatelessWidget {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0)),
-                  hintText: 'Enter your email',
+                  hintText: 'Enter your e-mail',
                 ),
               ),
             ),
@@ -72,6 +73,7 @@ class SignUp extends StatelessWidget {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0)),
                   hintText: 'Enter your password',
+                  suffixIcon: Icon(Icons.remove_red_eye),
                 ),
               ),
             ),
@@ -99,7 +101,7 @@ class SignUp extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20.0),
+            //const SizedBox(height: 20.0),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -160,7 +162,24 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Already signed up ?",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text("Login"),
+                ),
+              ],
+            ),
           ],
         ),
       ),
