@@ -17,8 +17,8 @@ class SignUp extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: Text(
               "Name",
               style: TextStyle(fontSize: 18),
