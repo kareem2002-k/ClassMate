@@ -8,15 +8,16 @@ class SignUp extends StatelessWidget {
     final nameCont = TextEditingController();
     final emailCont = TextEditingController();
     final passCont = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: const Text("Sign Up"),
         centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           const Padding(
             padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: Text(
@@ -35,9 +36,9 @@ class SignUp extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: Text(
               "Email",
               style: TextStyle(fontSize: 18),
@@ -54,9 +55,9 @@ class SignUp extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
             child: Text(
               "Password",
               style: TextStyle(fontSize: 18),
@@ -73,24 +74,27 @@ class SignUp extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 // Button action
               },
               style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue, // Text color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
+
                 padding: EdgeInsets.all(16.0),
                 backgroundColor: Colors.blue, // Background color
                 textStyle: TextStyle(color: Colors.white), // Text color
               ),
-              child: Text("Sign Up"), // Button text
+              child: const Text("Sign Up"), // Button text
             ),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -120,7 +124,7 @@ class SignUp extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.grey.shade300, // Border color
@@ -139,7 +143,7 @@ class SignUp extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Image.asset("assets/images/google.png"),
                       ),
-                      Text(
+                      const Text(
                         "Register with Google",
                         style: TextStyle(fontSize: 18),
                       )
