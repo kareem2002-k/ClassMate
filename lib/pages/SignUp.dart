@@ -74,24 +74,28 @@ class SignUp extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 50),
           Center(
-            child: ElevatedButton(
-              onPressed: () {
-                // Button action
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blue, // Text color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(12.0)),
+                child: MaterialButton(
+                  onPressed: () {},
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      )
+                    ],
+                  ),
                 ),
-
-                padding: EdgeInsets.all(16.0),
-                backgroundColor: Colors.blue, // Background color
-                textStyle: TextStyle(color: Colors.white), // Text color
               ),
-              child: const Text("Sign Up"), // Button text
             ),
           ),
           const SizedBox(height: 20.0),
@@ -107,8 +111,11 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "or continue with",
-                  style: TextStyle(color: Colors.grey[600]),
+                  "or",
+                  style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: 18,
+                  ),
                 ),
                 Expanded(
                   child: Container(
