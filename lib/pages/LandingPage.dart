@@ -30,6 +30,7 @@ class _LandingPageState extends State<LandingPage> {
           onTap: (){
             print("you clicked me");
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            // TODO: see of you can add animation in the transition
           },
       ),
     );

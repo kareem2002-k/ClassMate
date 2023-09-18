@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -74,7 +73,7 @@ class AuthenticationService {
   }
 
   // Signing User In
-  Future<String?> signIn(String email, String password) async {
+  Future<String?> logIn(String email, String password) async {
     try {
       // Sign the user in (on Firebase)
       await _auth.signInWithEmailAndPassword(
