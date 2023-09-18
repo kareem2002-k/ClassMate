@@ -86,10 +86,8 @@ class SignUp extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
                 ),
-
-                padding: EdgeInsets.all(16.0),
-                backgroundColor: Colors.blue, // Background color
-                textStyle: TextStyle(color: Colors.white), // Text color
+                padding: const EdgeInsets.all(16.0),
+                textStyle: const TextStyle(color: Colors.white), // Text color
               ),
               child: const Text("Sign Up"), // Button text
             ),
