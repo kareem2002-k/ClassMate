@@ -193,7 +193,9 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await Navigator.pushNamed(context, '/login');
+                  },
                   child: const Text("Login"),
                 ),
               ],
