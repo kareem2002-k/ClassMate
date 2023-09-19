@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final nameCont = TextEditingController();
-    final emailCont = TextEditingController();
-    final passCont = TextEditingController();
+  State<SignUp> createState() => _SignUpState();
+}
 
+class _SignUpState extends State<SignUp> {
+  final nameCont = TextEditingController();
+  final emailCont = TextEditingController();
+  final passCont = TextEditingController();
+  var hidePass = true;
+  var passIcons = const Icon(Icons.visibility_off);
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sign Up"),
@@ -68,15 +75,26 @@ class SignUp extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
               child: TextField(
+                obscureText: hidePass,
                 controller: passCont,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.0)),
                   hintText: 'Enter your password',
-                  suffixIcon: Icon(Icons.remove_red_eye),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      hidePass = !hidePass;
+                      passIcons = hidePass
+                          ? const Icon(Icons.visibility_off)
+                          : const Icon(Icons.visibility);
+                      setState(() {});
+                    },
+                    icon: passIcons,
+                  ),
                 ),
               ),
             ),
+
             const SizedBox(height: 50),
             Center(
               child: Padding(
