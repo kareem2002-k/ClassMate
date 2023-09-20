@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:class_mate/services/authentication_service.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -115,8 +116,8 @@ class _SignUpState extends State<SignUp> {
                     child: MaterialButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          print(emailCont.text);
-                          print(passCont.text);
+                          AuthenticationService().signUp(
+                              emailCont.text, passCont.text, nameCont.text);
                         }
                       },
                       child: const Row(
