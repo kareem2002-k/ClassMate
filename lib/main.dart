@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:class_mate/pages/HomePage.dart';
 import 'services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -24,10 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/sign_up': (context) => SignUp(),
-        '/login': (context) => LoginPage(),
+        '/sign_up': (context) => const SignUp(),
+        '/login': (context) => const LoginPage(),
       },
-      home: AuthCheck(),
+      home: const AuthCheck(),
     );
   }
 }
@@ -46,14 +45,14 @@ class _AuthCheckState extends State<AuthCheck> {
       stream: AuthenticationService().authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          final User? user = snapshot.data as User?;
+          final User? user = snapshot.data;
           if (user == null) {
-            return SignUp();
+            return const LoginPage();
           } else {
-            return HomePage();
+            return const HomePage();
           }
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
