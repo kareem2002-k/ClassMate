@@ -33,12 +33,12 @@ class _LoginPageState extends State<LoginPage> {
             Positioned(
               top: 0,
               right: 0,
-              left: 80, // Position at the top-right corner
+              left: 0, // Position at the top-right corner
               child: Container(
                 width: 210, // Adjust the width as needed
-                height: 210, // Adjust the height as needed
+                height: 200, // Adjust the height as needed
                 child: const Image(
-                  image: AssetImage('assets/images/Illustration.png'),
+                  image: AssetImage('assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
                 ),
               ),
             ),
@@ -56,8 +56,8 @@ class _LoginPageState extends State<LoginPage> {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      Color(0x50B379DF), // Start color (with opacity)
-                      Color(0x30B379DF), // End color (with opacity)
+                      Color(0x6082AFC4), // Start color (with opacity)
+                      Color(0x50B4E7FF), // End color (with opacity)
                     ],
                   ),
                 ),
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Container(
                             padding: const EdgeInsets.all(8.0),
                             decoration: BoxDecoration(
-                              color: signup,
+                              color: Colors.blue,
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: MaterialButton(
