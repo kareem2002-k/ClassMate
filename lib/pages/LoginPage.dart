@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/services.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 

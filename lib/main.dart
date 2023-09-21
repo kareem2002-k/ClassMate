@@ -2,7 +2,9 @@ import 'package:class_mate/pages/LoginPage.dart';
 import 'package:class_mate/pages/SignUp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:class_mate/pages/HomePage.dart';
+import 'services/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -19,8 +21,44 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(),
+    return MaterialApp(
+      routes: {
+        '/sign_up': (context) => const SignUp(),
+        '/login': (context) => const LoginPage(),
+      },
+      home: const AuthCheck(),
+    );
+  }
+}
+
+class AuthCheck extends StatefulWidget {
+  const AuthCheck({super.key});
+
+  @override
+  State<AuthCheck> createState() => _AuthCheckState();
+}
+
+class _AuthCheckState extends State<AuthCheck> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: AuthenticationService().authStateChanges,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final User? user = snapshot.data;
+          if (user == null) {
+            return const LoginPage();
+          } else {
+            return const HomePage();
+          }
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
     );
   }
 }
