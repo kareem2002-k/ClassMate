@@ -1,9 +1,6 @@
-
-
-
-
 import 'package:flutter/material.dart';
-
+import 'package:class_mate/services/authentication_service.dart';
+import 'package:flutter/services.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -14,9 +11,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   Color myColor = const Color.fromRGBO(179, 121, 223, 0.2);
   Color signup = const Color.fromRGBO(180, 170, 242, 100);
+  final emailCont = TextEditingController();
+  final passCont = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       body: Center(
         child: Stack(
@@ -43,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
               bottom: 0,
               child: Container(
                 width: 360,
-
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -82,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                          // controller: emailCont,
+                          controller: emailCont,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
@@ -103,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                          // controller: passCont,
+                          controller: passCont,
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -124,12 +126,15 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                AuthenticationService()
+                                    .logIn(emailCont.text, passCont.text);
+                              },
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "Sign Up",
+                                    "Log in",
                                     style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.black,
@@ -146,15 +151,17 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Already signed up ?",
+                            "Don't have an account ?",
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.grey[600],
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
-                            child: const Text("Login"),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/sign_up');
+                            },
+                            child: const Text("Sign up"),
                           ),
                         ],
                       ),
@@ -169,20 +176,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
