@@ -65,9 +65,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        width: 100,
-                      ),
+                      Spacer(),
                       CircleAvatar(
                         backgroundColor: Colors.grey[350],
                         child: IconButton(
@@ -96,6 +94,7 @@ class SettingsPage extends StatelessWidget {
                           // Handle the row tap action here
                         },
                         child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
@@ -105,10 +104,10 @@ class SettingsPage extends StatelessWidget {
                               width: 20,
                             ),
                             Text("Profile"),
-                            SizedBox(
-                              width: 200,
-                            ),
-                            Icon(Icons.navigate_next),
+                            Spacer(),
+                            Align(
+                                alignment: Alignment.centerRight,
+                                child: Icon(Icons.navigate_next)),
                           ],
                         ),
                       ),
@@ -128,9 +127,7 @@ class SettingsPage extends StatelessWidget {
                               width: 20,
                             ),
                             Text("Settings"),
-                            SizedBox(
-                              width: 200,
-                            ),
+                            Spacer(),
                             Icon(Icons.navigate_next),
                           ],
                         ),
@@ -150,9 +147,7 @@ class SettingsPage extends StatelessWidget {
                               width: 20,
                             ),
                             Text("About Us"),
-                            SizedBox(
-                              width: 200,
-                            ),
+                            Spacer(),
                             Icon(Icons.navigate_next),
                           ],
                         ),
@@ -165,6 +160,21 @@ class SettingsPage extends StatelessWidget {
             SizedBox(
               height: 100,
             ),
+            ButtonBar(
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Text(
+                        "Privacy Policy",
+                      ),
+                      Icon(Icons.navigate_next),
+                    ],
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
