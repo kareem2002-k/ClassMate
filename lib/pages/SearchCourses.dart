@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:class_mate/services/firestore_service.dart';
+import 'package:class_mate/Classes/Course.dart';
+import 'package:class_mate/widgets/CourseItem.dart';
 
 class SearchCourses extends StatefulWidget {
   const SearchCourses({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class SearchCourses extends StatefulWidget {
 
 class _SearchCoursesState extends State<SearchCourses> {
   bool _isCoursesSelected = true;
+  final firestoreService = FirestoreService();
 
   void _toggleSelected(bool selected) {
     setState(() {
@@ -111,7 +115,37 @@ class _SearchCoursesState extends State<SearchCourses> {
               ),
               const SizedBox(height: 16.0),
               _isCoursesSelected
-                  ? const Text('Courses Content')
+                  ? FutureBuilder<List<Course>>(
+                      future: firestoreService.getAllCourses(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator(); // Show a loading indicator while fetching data
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Text(
+                              'No courses available.'); // Handle the case when no courses are available
+                        } else {
+                          final courses = snapshot.data;
+
+                          return _isCoursesSelected
+                              ? ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: courses!.length,
+                                  itemBuilder: (context, index) {
+                                    final course = courses[index];
+                                    return CourseItem(
+                                      courseName: course.courseName,
+                                      courseCode: course.courseCode,
+                                    );
+                                  },
+                                )
+                              : const Text('Centers Content');
+                        }
+                      },
+                    )
                   : const Text('Centers Content'),
             ],
           ),
