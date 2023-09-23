@@ -1,4 +1,5 @@
 import 'package:class_mate/pages/LoginPage.dart';
+import 'package:class_mate/pages/ProfilePage.dart';
 import 'package:class_mate/pages/SettingsPage.dart';
 import 'package:class_mate/pages/SignUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/sign_up': (context) => const SignUp(),
         '/login': (context) => const LoginPage(),
+        '/profile': (context) => const ProfilePage(),
       },
       home: const AuthCheck(),
     );
