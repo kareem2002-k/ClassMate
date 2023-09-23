@@ -2,8 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:class_mate/pages/LoginPage.dart';
+import 'ProfilePage.dart';
+import 'SettingsPage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0; // Index of the selected tab
+
+  final List<Widget> _pages = [
+    HomePageContent(), // Your original home page content
+    SettingsPage(), // Add your SettingsPage here
+  ];
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -15,17 +29,23 @@ class HomePage extends StatelessWidget {
             // Handle case where user is null (not authenticated)
             return LoginPage();
           } else {
-            // User is authenticated, access user properties safely
-            String? displayName = user.displayName;
-            String? email = user.email;
-
-            // Check for null values before using them
-            if (displayName != null && email != null) {
-              return buildAuthenticatedUI(context, displayName, email);
-            } else {
-              // Handle case where user properties are null
-              return Text("User information is missing.");
-            }
+            return Scaffold(
+              body: _pages[_selectedIndex], // Show the selected page content
+              bottomNavigationBar: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'Settings',
+                  ),
+                ],
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+              ),
+            );
           }
         } else {
           return Scaffold(
@@ -38,33 +58,29 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildAuthenticatedUI(
-      BuildContext context, String displayName, String email) {
-    // Build your authenticated UI here using displayName and email
-    return WillPopScope(
-      onWillPop: () async {
-        // Prevent navigation back to the previous page
-        return false;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome, $displayName'),
-          automaticallyImplyLeading: false, // Hide the back button
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Email: $email'),
-              ElevatedButton(
-                onPressed: () {
-                  AuthenticationService().signOut();
-                },
-                child: Text('Sign Out'),
-              ),
-            ],
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+}
+
+class HomePageContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // Build your original home page content here
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Welcome to the Home Page'),
+          ElevatedButton(
+            onPressed: () {
+              // Do something when a button is pressed on the home page
+            },
+            child: Text('Button on Home Page'),
           ),
-        ),
+        ],
       ),
     );
   }
