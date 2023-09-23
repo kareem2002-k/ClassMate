@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/authentication_service.dart';
@@ -7,6 +8,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final User? user = AuthenticationService().currentUser;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -60,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                             height: 5,
                           ),
                           Text(
-                            "Name of student",
+                            user!.displayName!,
                             style: TextStyle(
                               fontSize: 17,
                             ),
