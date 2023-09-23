@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:class_mate/services/authentication_service.dart';
 import 'package:class_mate/pages/HomePage.dart';
+import 'package:class_mate/services/authentication_service.dart';
+import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -241,7 +241,7 @@ class _SignUpState extends State<SignUp> {
                   TextButton(
                     onPressed: () async {
                       //pop to login page
-                      Navigator.pop(context);
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
                     child: const Text("Login"),
                   ),
