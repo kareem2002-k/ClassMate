@@ -1,3 +1,4 @@
+import 'package:class_mate/pages/ProfilePage.dart';
 import 'package:flutter/material.dart';
 
 import '../services/authentication_service.dart';
@@ -9,6 +10,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+
         child: Column(
           children: [
             Center(
@@ -95,19 +97,28 @@ class SettingsPage extends StatelessWidget {
                       // Profile Tab
                       InkWell(
                         onTap: () {
-                          // Handle the row tap action here
+                          // Navigate to the ProfilePage
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePage(),
+                            ),
+                          ); // Handle the row tap action here
                         },
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
                               child: Icon(Icons.person_outline),
                             ),
                             SizedBox(
+
                               width: 20,
                             ),
                             Text("Profile"),
+
+
                             Spacer(),
                             Align(
                                 alignment: Alignment.centerRight,
@@ -129,6 +140,7 @@ class SettingsPage extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 20,
+
                             ),
                             Text("Settings"),
                             Spacer(),
