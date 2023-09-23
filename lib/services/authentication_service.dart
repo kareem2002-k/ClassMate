@@ -34,7 +34,7 @@ class AuthenticationService {
         await user.updateDisplayName(name);
 
         // Create a new document for the user with uid
-        await storeUserInfo(user.uid, name, email, password);
+        await storeUserInfo(user.uid, name, email);
       }
 
       return null; // No error, registration successful
@@ -54,16 +54,18 @@ class AuthenticationService {
 
 // Function to store  user information in Firestore
   Future<String?> storeUserInfo(
-      String userId, String name, String email, String phone) async {
+      String userId, String name, String email) async {
     try {
       final CollectionReference usersCollection =
           FirebaseFirestore.instance.collection('users');
 
       // Create a document for the user or update an existing one
       await usersCollection.doc(userId).set({
-        'Fullname': name,
+        'fullname': name,
         'age': email,
-        'facultyID': phone,
+        'university': 'Ain Shams University',
+        'faculty': 'Faculty of Engineering',
+        'followed_courses': [],
       });
       return null; // No error, registration successful
     } catch (e) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/services.dart';
+import 'package:class_mate/pages/HomePage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,10 +16,33 @@ class _LoginPageState extends State<LoginPage> {
   final emailCont = TextEditingController();
   final passCont = TextEditingController();
 
+  Future<void> _handleLogin() async {
+    String? result =
+        await AuthenticationService().logIn(emailCont.text, passCont.text);
+
+    if (result != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error: $result"),
+        ),
+      );
+    } else {
+      // Navigate to the home page and replace the current route
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+      // Remove the previous routes from the stack
+      Navigator.of(context).removeRoute(
+        ModalRoute.of(context)!,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-      
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
@@ -39,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                 width: 210, // Adjust the width as needed
                 height: 200, // Adjust the height as needed
                 child: const Image(
-                  image: AssetImage('assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
+                  image: AssetImage(
+                      'assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
                 ),
               ),
             ),
@@ -128,9 +153,8 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: MaterialButton(
-                              onPressed: () {
-                                AuthenticationService()
-                                    .logIn(emailCont.text, passCont.text);
+                              onPressed: () async {
+                                await _handleLogin();
                               },
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +185,8 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/sign_up');
+                              Navigator.pushNamed(context,
+                                  '/sign_up'); // Use push to allow navigation back to login page
                             },
                             child: const Text("Sign up"),
                           ),
