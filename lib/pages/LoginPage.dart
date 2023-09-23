@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:class_mate/services/authentication_service.dart';
-import 'package:flutter/services.dart';
 import 'package:class_mate/pages/HomePage.dart';
+import 'package:class_mate/services/authentication_service.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context,
+                              Navigator.pushReplacementNamed(context,
                                   '/sign_up'); // Use push to allow navigation back to login page
                             },
                             child: const Text("Sign up"),
