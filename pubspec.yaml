@@ -69,6 +69,9 @@ flutter_launcher_icons:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/images/user.png
+    - assets/images/support, technology, error _ deadline, stress, man, customer service.png
+    - assets/images/classmate1.png
     - assets/images/
     - assets/icon/bell.png
 
