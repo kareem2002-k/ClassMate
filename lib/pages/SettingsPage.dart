@@ -12,7 +12,6 @@ class SettingsPage extends StatelessWidget {
     final User? user = AuthenticationService().currentUser;
     return Scaffold(
       body: SafeArea(
-
         child: Column(
           children: [
             Center(
@@ -91,36 +90,33 @@ class SettingsPage extends StatelessWidget {
             ),
             Container(
               child: Expanded(
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 16, 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      // Profile Tab
-                      InkWell(
-                        onTap: () {
-                          // Navigate to the ProfilePage
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => ProfilePage(),
-                            ),
-                          ); // Handle the row tap action here
-                        },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Profile Tab
+                    InkWell(
+                      onTap: () {
+                        // Navigate to the ProfilePage
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProfilePage(),
+                          ),
+                        ); // Handle the row tap action here
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
                               child: Icon(Icons.person_outline),
                             ),
                             SizedBox(
-
                               width: 20,
                             ),
                             Text("Profile"),
-
-
                             Spacer(),
                             Align(
                                 alignment: Alignment.centerRight,
@@ -128,12 +124,15 @@ class SettingsPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                    ),
 
-                      // Settings Tab
-                      InkWell(
-                        onTap: () {
-                          // Handle the row tap action here
-                        },
+                    // Settings Tab
+                    InkWell(
+                      onTap: () {
+                        // Handle the row tap action here
+                      },
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -142,7 +141,6 @@ class SettingsPage extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 20,
-
                             ),
                             Text("Settings"),
                             Spacer(),
@@ -150,11 +148,14 @@ class SettingsPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // About Tab
-                      InkWell(
-                        onTap: () {
-                          // Handle the row tap action here
-                        },
+                    ),
+                    // About Tab
+                    InkWell(
+                      onTap: () {
+                        // Handle the row tap action here
+                      },
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           children: [
                             CircleAvatar(
@@ -170,8 +171,8 @@ class SettingsPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
