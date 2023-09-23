@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:class_mate/pages/LoginPage.dart';
-import 'ProfilePage.dart';
 import 'SettingsPage.dart';
+import 'SearchCourses.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0; // Index of the selected tab
 
   final List<Widget> _pages = [
-    HomePageContent(), // Your original home page content
+    SearchCourses(), // Your original home page content
     const SettingsPage(), // Add your SettingsPage here
   ];
 
@@ -55,12 +55,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.settings,
+                      Icons.person,
                       size: 30, // Adjust the size as needed
                       color: Colors.grey, // Adjust the color as needed
                     ),
                     title: const Text(
-                      'Settings',
+                      'Profile',
                       style: TextStyle(
                         fontSize: 16, // Adjust the font size as needed
                         fontWeight:
@@ -91,26 +91,5 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-}
-
-class HomePageContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Build your original home page content here
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Welcome to the Home Page'),
-          ElevatedButton(
-            onPressed: () {
-              // Do something when a button is pressed on the home page
-            },
-            child: const Text('Button on Home Page'),
-          ),
-        ],
-      ),
-    );
   }
 }
