@@ -4,6 +4,7 @@ class SearchCourses extends StatefulWidget {
   const SearchCourses({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SearchCoursesState createState() => _SearchCoursesState();
 }
 
@@ -73,7 +74,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                         color: Colors.grey,
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Search',
@@ -82,9 +83,9 @@ class _SearchCoursesState extends State<SearchCourses> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.filter_list,
-                        color: Colors.grey,
+                        color: Color(0xFF7BB4E3),
                       ),
                       onPressed: () {
                         // Handle filter button press
@@ -126,7 +127,7 @@ class _SearchCoursesState extends State<SearchCourses> {
           width: constraints.maxWidth > 300 ? 170 : double.infinity,
           height: 48,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(),
+          decoration: const BoxDecoration(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,

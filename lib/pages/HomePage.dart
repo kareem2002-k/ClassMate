@@ -7,7 +7,10 @@ import 'SearchCourses.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -15,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0; // Index of the selected tab
 
   final List<Widget> _pages = [
-    SearchCourses(), // Your original home page content
+    const SearchCourses(), // Your original home page content
     const SettingsPage(), // Add your SettingsPage here
   ];
 
@@ -60,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.grey, // Adjust the color as needed
                     ),
                     title: const Text(
-                      'Profile',
+                      'Account',
                       style: TextStyle(
                         fontSize: 16, // Adjust the font size as needed
                         fontWeight:
