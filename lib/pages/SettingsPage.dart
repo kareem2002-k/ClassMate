@@ -1,3 +1,4 @@
+import 'package:class_mate/pages/ProfilePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,12 @@ class SettingsPage extends StatelessWidget {
                       // Profile Tab
                       InkWell(
                         onTap: () {
-                          // Handle the row tap action here
+                          // Navigate to the ProfilePage
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePage(),
+                            ),
+                          ); // Handle the row tap action here
                         },
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
