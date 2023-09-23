@@ -62,10 +62,11 @@ class AuthenticationService {
       // Create a document for the user or update an existing one
       await usersCollection.doc(userId).set({
         'fullname': name,
-        'age': email,
+        'email': email,
         'university': 'Ain Shams University',
         'faculty': 'Faculty of Engineering',
         'followed_courses': [],
+
       });
       return null; // No error, registration successful
     } catch (e) {
