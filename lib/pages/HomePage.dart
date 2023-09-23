@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:class_mate/pages/LoginPage.dart';
 import 'ProfilePage.dart';
 import 'SettingsPage.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     HomePageContent(), // Your original home page content
-    SettingsPage(), // Add your SettingsPage here
+    const SettingsPage(), // Add your SettingsPage here
   ];
 
   @override
@@ -27,28 +28,56 @@ class _HomePageState extends State<HomePage> {
           final User? user = snapshot.data;
           if (user == null) {
             // Handle case where user is null (not authenticated)
-            return LoginPage();
+            return const LoginPage();
           } else {
             return Scaffold(
               body: _pages[_selectedIndex], // Show the selected page content
-              bottomNavigationBar: BottomNavigationBar(
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
+              bottomNavigationBar: FlashyTabBar(
+                selectedIndex: _selectedIndex,
+                onItemSelected: _onItemTapped,
+                items: [
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      Icons.home,
+                      size: 30, // Adjust the size as needed
+                      color: Colors.grey, // Adjust the color as needed
+                    ),
+                    title: const Text(
+                      'Home',
+                      style: TextStyle(
+                        fontSize: 16, // Adjust the font size as needed
+                        fontWeight:
+                            FontWeight.bold, // Adjust the font weight as needed
+                        color: Color(
+                            0xFF52B6DF), // Adjust the text color as needed
+                      ),
+                    ),
                   ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'Settings',
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      Icons.settings,
+                      size: 30, // Adjust the size as needed
+                      color: Colors.grey, // Adjust the color as needed
+                    ),
+                    title: const Text(
+                      'Settings',
+                      style: TextStyle(
+                        fontSize: 16, // Adjust the font size as needed
+                        fontWeight:
+                            FontWeight.bold, // Adjust the font weight as needed
+                        color: Color(
+                            0xFF52B6DF), // Adjust the text color as needed
+                      ),
+                    ),
                   ),
                 ],
-                currentIndex: _selectedIndex,
-                onTap: _onItemTapped,
+                animationDuration: const Duration(milliseconds: 200),
+                animationCurve: Curves.easeInExpo,
               ),
             );
           }
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
@@ -73,12 +102,12 @@ class HomePageContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Welcome to the Home Page'),
+          const Text('Welcome to the Home Page'),
           ElevatedButton(
             onPressed: () {
               // Do something when a button is pressed on the home page
             },
-            child: Text('Button on Home Page'),
+            child: const Text('Button on Home Page'),
           ),
         ],
       ),
