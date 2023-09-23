@@ -55,12 +55,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FlashyTabBarItem(
                     icon: const Icon(
-                      Icons.settings,
+                      Icons.person,
                       size: 30, // Adjust the size as needed
                       color: Colors.grey, // Adjust the color as needed
                     ),
                     title: const Text(
-                      'Settings',
+                      'Profile',
                       style: TextStyle(
                         fontSize: 16, // Adjust the font size as needed
                         fontWeight:
