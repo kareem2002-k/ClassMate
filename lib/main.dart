@@ -1,5 +1,7 @@
 import 'package:class_mate/pages/LoginPage.dart';
+import 'package:class_mate/pages/SettingsPage.dart';
 import 'package:class_mate/pages/SignUp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:class_mate/pages/HomePage.dart';
@@ -49,7 +51,7 @@ class _AuthCheckState extends State<AuthCheck> {
           if (user == null) {
             return const LoginPage();
           } else {
-            return const HomePage();
+            return HomePage(); // Remove the null check operator here
           }
         } else {
           return const Scaffold(

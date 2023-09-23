@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
+import 'package:class_mate/pages/HomePage.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -15,6 +16,35 @@ class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   var hidePass = true;
   var passIcons = const Icon(Icons.visibility_off);
+
+  Future<void> _handleSignUp() async {
+    if (_formKey.currentState!.validate()) {
+      String? result = await AuthenticationService().signUp(
+        emailCont.text,
+        passCont.text,
+        nameCont.text,
+      );
+
+      if (result != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: $result"),
+          ),
+        );
+      } else {
+        // Navigate to the home page and replace the current route
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+        // Remove the previous routes from the stack
+        Navigator.of(context).removeRoute(
+          ModalRoute.of(context)!,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,11 +144,8 @@ class _SignUpState extends State<SignUp> {
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(12.0)),
                     child: MaterialButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          AuthenticationService().signUp(
-                              emailCont.text, passCont.text, nameCont.text);
-                        }
+                      onPressed: () async {
+                        await _handleSignUp();
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +240,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      await Navigator.pushNamed(context, '/login');
+                      //pop to login page
+                      Navigator.pop(context);
                     },
                     child: const Text("Login"),
                   ),
