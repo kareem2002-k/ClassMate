@@ -12,6 +12,7 @@ class SettingsPage extends StatelessWidget {
     final User? user = AuthenticationService().currentUser;
     return Scaffold(
       body: SafeArea(
+
         child: Column(
           children: [
             Center(
@@ -108,14 +109,18 @@ class SettingsPage extends StatelessWidget {
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
                               child: Icon(Icons.person_outline),
                             ),
                             SizedBox(
+
                               width: 20,
                             ),
                             Text("Profile"),
+
+
                             Spacer(),
                             Align(
                                 alignment: Alignment.centerRight,
@@ -137,6 +142,7 @@ class SettingsPage extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 20,
+
                             ),
                             Text("Settings"),
                             Spacer(),
