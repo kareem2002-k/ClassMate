@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../services/authentication_service.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key});
 
@@ -70,7 +72,9 @@ class SettingsPage extends StatelessWidget {
                         backgroundColor: Colors.grey[350],
                         child: IconButton(
                           icon: Icon(Icons.logout),
-                          onPressed: () {},
+                          onPressed: () {
+                            AuthenticationService().signOut();
+                          },
                         ),
                       ),
                     ],
