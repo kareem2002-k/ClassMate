@@ -40,17 +40,28 @@ dependencies:
   firebase_core: ^2.15.1
   flutter_typeahead: ^4.7.0
   cloud_firestore: ^4.9.1
+  curved_navigation_bar: ^1.0.3
+  sliding_clipped_nav_bar: ^3.1.0+4
+  flashy_tab_bar2: ^0.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+  flutter_lints: ^2.0.0
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    image_path: "assets/icon/play_store_512.png"
+    min_sdk_android: 21
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -58,7 +69,19 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/images/user.png
+    - assets/images/support, technology, error _ deadline, stress, man, customer service.png
+    - assets/images/classmate1.png
     - assets/images/
+    - assets/icon/bell.png
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+        - asset: fonts/Poppins-Bold.ttf
+          weight: 700
+  
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

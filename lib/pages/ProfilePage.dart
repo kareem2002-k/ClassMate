@@ -1,75 +1,66 @@
-import 'package:class_mate/pages/HomePage.dart';
-import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  Color myColor = const Color.fromRGBO(179, 121, 223, 0.2);
-  Color signup = const Color.fromRGBO(180, 170, 242, 100);
-  final emailCont = TextEditingController();
-  final passCont = TextEditingController();
-
-  Future<void> _handleLogin() async {
-    String? result =
-        await AuthenticationService().logIn(emailCont.text, passCont.text);
-
-    if (result != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error: $result"),
-        ),
-      );
-    } else {
-      // Navigate to the home page and replace the current route
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-      // Remove the previous routes from the stack
-      Navigator.of(context).removeRoute(
-        ModalRoute.of(context)!,
-      );
-    }
-  }
-
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     return Scaffold(
+      // appBar: AppBar(
+      //
+      //   backgroundColor: Colors.white,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.black, //change your color here
+      //   ),
+      //   elevation: 0,
+      // ),
+
+
       body: Center(
+
         child: Stack(
+
           children: [
             Container(
               width: double.infinity,
               height: double.infinity,
-              color: Colors.white, // Set the background color here
+              color: Colors.white,
+
+              // Set the background color here
             ),
+
             Positioned(
-              top: 0,
+              top: 40,
               right: 0,
               left: 0, // Position at the top-right corner
               child: Container(
-                width: 210, // Adjust the width as needed
-                height: 200, // Adjust the height as needed
+                width: 150, // Adjust the width as needed
+                height: 90, // Adjust the height as needed
                 child: const Image(
                   image: AssetImage(
-                      'assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
+                      'assets/images/user.png'),
                 ),
               ),
             ),
+        // Back Arrow Button
             Positioned(
-              top: 200,
+              top: 22,
+              left: 0,
+              child: IconButton(
+                iconSize: 33,
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+            Positioned(
+              top: 130,
               bottom: 0,
               child: Container(
                 width: 360,
@@ -92,15 +83,29 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
+
+                      const SizedBox(height: 15),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: Text(
-                          "Login",
-                          style: TextStyle(fontSize: 30),
+                          "Name",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                        child: TextField(
+                         // controller: emailCont,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            hintText: 'Enter your Name',
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),
+
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: Text(
@@ -111,38 +116,59 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                          controller: emailCont,
+                         // controller: passCont,
+
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            hintText: 'Enter your email',
+                            hintText: '',
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const SizedBox(height: 20),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: Text(
-                          "Password",
+                          "University",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                          controller: passCont,
-                          obscureText: true,
+                          // controller: passCont,
+
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
-                            hintText: 'Enter your password',
+                            hintText: 'Ain shams',
+                          ),
+                        ),
+                      ),// Add spacing
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                        child: Text(
+                          "faculty",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                        child: TextField(
+                          // controller: passCont,
+
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            hintText: 'Engineering',
                           ),
                         ),
                       ),
-                      const SizedBox(height: 50), // Add spacing
+                      const SizedBox(height: 10),
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -154,16 +180,20 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: MaterialButton(
                               onPressed: () async {
-                                await _handleLogin();
+                              //  await _handleLogin();
                               },
+
                               child: const Row(
+
                                 mainAxisAlignment: MainAxisAlignment.center,
+
                                 children: [
+
                                   Text(
-                                    "Log in",
+                                    "update profile",
                                     style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -173,28 +203,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account ?",
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacementNamed(context,
-                                  '/sign_up'); // Use push to allow navigation back to login page
-                            },
-                            child: const Text("Sign up"),
-                          ),
-                        ],
-                      ),
+
                     ],
                   ),
                 ),
+
+
               ),
             ),
           ],
