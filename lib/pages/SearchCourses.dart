@@ -119,7 +119,9 @@ class _SearchCoursesState extends State<SearchCourses> {
                     future: firestoreService.getAllCourses(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator(); // Show a loading indicator while fetching data
+                        return const Center(
+                            child:
+                                CircularProgressIndicator()); // Show a loading indicator while fetching data
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -144,7 +146,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                                         );
                                       },
                                       physics:
-                                          AlwaysScrollableScrollPhysics(), // Set this property
+                                          const AlwaysScrollableScrollPhysics(), // Set this property
                                     ),
                                   ),
                                 ],
