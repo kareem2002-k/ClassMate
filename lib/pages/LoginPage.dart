@@ -15,6 +15,8 @@ class _LoginPageState extends State<LoginPage> {
   Color signup = const Color.fromRGBO(180, 170, 242, 100);
   final emailCont = TextEditingController();
   final passCont = TextEditingController();
+  var hidePass = true;
+  var passIcons = const Icon(Icons.visibility_off);
 
   Future<void> _handleLogin() async {
     String? result =
@@ -131,14 +133,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (val) => val!.length < 6
+                              ? 'Enter a password with length of 6+ chars'
+                              : null,
+                          obscureText: hidePass,
                           controller: passCont,
-                          obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
+                                borderRadius: BorderRadius.circular(12.0)),
                             hintText: 'Enter your password',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                hidePass = !hidePass;
+                                passIcons = hidePass
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility);
+                                setState(() {});
+                              },
+                              icon: passIcons,
+                            ),
                           ),
                         ),
                       ),
