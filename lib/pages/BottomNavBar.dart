@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:class_mate/pages/LoginPage.dart';
-import 'SettingsPage.dart';
+import 'AccountPage.dart';
 import 'SearchCourses.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 

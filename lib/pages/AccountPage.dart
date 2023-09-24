@@ -21,12 +21,12 @@ class SettingsPage extends StatelessWidget {
                 height: 63,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 8, 20, 0),
               child: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     border: Border(
                       top: BorderSide(
@@ -59,22 +59,20 @@ class SettingsPage extends StatelessWidget {
                               color: Colors.grey[500],
                             ),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
+                          const SizedBox(height: 5),
                           Text(
                             user!.displayName!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 17,
                             ),
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
                       CircleAvatar(
                         backgroundColor: Colors.grey[350],
                         child: IconButton(
-                          icon: Icon(Icons.logout),
+                          icon: const Icon(Icons.logout),
                           onPressed: () {
                             AuthenticationService().signOut();
                           },
@@ -85,9 +83,7 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Container(
               child: Expanded(
                 child: Column(
@@ -105,20 +101,18 @@ class SettingsPage extends StatelessWidget {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
+                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
-                              child: Icon(Icons.person_outline),
+                              child: const Icon(Icons.person_outline),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Profile"),
-                            Spacer(),
-                            Align(
+                            const SizedBox(width: 20),
+                            const Text("Profile"),
+                            const Spacer(),
+                            const Align(
                                 alignment: Alignment.centerRight,
                                 child: Icon(Icons.navigate_next)),
                           ],
@@ -132,19 +126,17 @@ class SettingsPage extends StatelessWidget {
                         // Handle the row tap action here
                       },
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
+                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
-                              child: Icon(Icons.settings),
+                              child: const Icon(Icons.settings),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("Settings"),
-                            Spacer(),
-                            Icon(Icons.navigate_next),
+                            const SizedBox(width: 20),
+                            const Text("Settings"),
+                            const Spacer(),
+                            const Icon(Icons.navigate_next), // TODO: navigate to settings page
                           ],
                         ),
                       ),
@@ -155,19 +147,17 @@ class SettingsPage extends StatelessWidget {
                         // Handle the row tap action here
                       },
                       child: Container(
-                        padding: EdgeInsets.fromLTRB(30, 5, 16, 5),
+                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
                         child: Row(
                           children: [
                             CircleAvatar(
                               backgroundColor: Colors.grey[300],
-                              child: Icon(Icons.info),
+                              child: const Icon(Icons.info),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text("About Us"),
-                            Spacer(),
-                            Icon(Icons.navigate_next),
+                            const SizedBox(width: 20,),
+                            const Text("About Us"),
+                            const Spacer(),
+                            const Icon(Icons.navigate_next),
                           ],
                         ),
                       ),
@@ -176,14 +166,12 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 100,
-            ),
+            const SizedBox(height: 100,),
             ButtonBar(
               children: [
                 TextButton(
                   onPressed: () {},
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text(
                         "Privacy Policy",

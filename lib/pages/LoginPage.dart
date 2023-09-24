@@ -1,4 +1,4 @@
-import 'package:class_mate/pages/HomePage.dart';
+import 'package:class_mate/pages/BottomNavBar.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -154,6 +154,34 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             child: MaterialButton(
                               onPressed: () async {
+                                if (passCont.text.length < 6) {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                            backgroundColor: Colors.grey[300],
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            title: const Center(
+                                                child: Text(
+                                              "Password is too weak",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            actions: [
+                                              Center(
+                                                child: ElevatedButton(
+                                                    onPressed: () {
+                                                      // Clear the text fields here
+                                                      emailCont.clear();
+                                                      passCont.clear();
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text("OK")),
+                                              )
+                                            ],
+                                          ));
+                                }
                                 await _handleLogin();
                               },
                               child: const Row(

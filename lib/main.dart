@@ -1,14 +1,16 @@
+import 'package:class_mate/pages/LandingPage.dart';
 import 'package:class_mate/pages/LoginPage.dart';
 import 'package:class_mate/pages/ProfilePage.dart';
-import 'package:class_mate/pages/SettingsPage.dart';
+import 'package:class_mate/pages/AccountPage.dart';
 import 'package:class_mate/pages/SignUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:class_mate/pages/HomePage.dart';
+import 'package:class_mate/pages/BottomNavBar.dart';
 import 'services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +53,7 @@ class _AuthCheckState extends State<AuthCheck> {
         if (snapshot.connectionState == ConnectionState.active) {
           final User? user = snapshot.data;
           if (user == null) {
-            return const LoginPage();
+            return const LandingPage();
           } else {
             return HomePage(); // Remove the null check operator here
           }
