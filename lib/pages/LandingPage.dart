@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'LoginPage.dart';
 
@@ -28,8 +29,7 @@ class _LandingPageState extends State<LandingPage> {
             ),
           ),
           onTap: (){
-            print("you clicked me");
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
             // TODO: see of you can add animation in the transition
           },
       ),
