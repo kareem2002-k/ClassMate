@@ -58,23 +58,26 @@ class CourseItem extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: 50,
-            height: 120, // Increased height
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-                topLeft: Radius.circular(20), // Added to make it a full capsule
-                bottomLeft:
-                    Radius.circular(20), // Added to make it a full capsule
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Container(
+              width: 50,
+              height: 120, // Increased height
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                  topLeft: Radius.circular(20), // Added to make it a full capsule
+                  bottomLeft:
+                      Radius.circular(20), // Added to make it a full capsule
+                ),
               ),
-            ),
-            child: Icon(
-              Icons.arrow_forward,
-              color: Colors.black,
-              size: 24,
+              child: const Icon(
+                Icons.arrow_forward,
+                color: Colors.black,
+                size: 24,
+              ),
             ),
           ),
         ],

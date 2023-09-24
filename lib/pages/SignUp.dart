@@ -1,4 +1,4 @@
-import 'package:class_mate/pages/HomePage.dart';
+import 'package:class_mate/pages/BottomNavBar.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 
