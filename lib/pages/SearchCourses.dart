@@ -24,6 +24,7 @@ class _SearchCoursesState extends State<SearchCourses> {
   @override
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.of(context).padding;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: Padding(
@@ -131,7 +132,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                             ? Column(
                                 children: [
                                   SizedBox(
-                                    height: 440,
+                                    height: screenHeight * 0.55,
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: courses!.length,
