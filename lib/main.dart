@@ -1,4 +1,4 @@
-import 'package:class_mate/pages/BottomNavBar.dart';
+import 'package:class_mate/pages/CourseInfo.dart';
 import 'package:class_mate/pages/LandingPage.dart';
 import 'package:class_mate/pages/LoginPage.dart';
 import 'package:class_mate/pages/ProfilePage.dart';
@@ -42,7 +42,8 @@ class MyApp extends StatelessWidget {
               '/login': (context) => const LoginPage(),
               '/profile': (context) => const ProfilePage(),
             },
-            home: const AuthCheck(),
+            // home: const AuthCheck(),
+            home: const CourseInfo(),
           );
         });
   }
