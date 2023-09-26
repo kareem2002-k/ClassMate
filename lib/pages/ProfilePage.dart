@@ -20,11 +20,8 @@ class _ProfilePageState extends State<ProfilePage> {
       //   elevation: 0,
       // ),
 
-
       body: Center(
-
         child: Stack(
-
           children: [
             Container(
               width: double.infinity,
@@ -42,12 +39,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 width: 150, // Adjust the width as needed
                 height: 90, // Adjust the height as needed
                 child: const Image(
-                  image: AssetImage(
-                      'assets/images/user.png'),
+                  image: AssetImage('assets/images/user.png'),
                 ),
               ),
             ),
-        // Back Arrow Button
+            // Back Arrow Button
             Positioned(
               top: 22,
               left: 0,
@@ -83,7 +79,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       const SizedBox(height: 15),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
@@ -95,7 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                         // controller: emailCont,
+                          // controller: emailCont,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
@@ -116,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
-                         // controller: passCont,
+                          // controller: passCont,
 
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -146,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             hintText: 'Ain shams',
                           ),
                         ),
-                      ),// Add spacing
+                      ), // Add spacing
                       const SizedBox(height: 20),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
@@ -180,15 +175,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             child: MaterialButton(
                               onPressed: () async {
-                              //  await _handleLogin();
+                                //  await _handleLogin();
                               },
-
                               child: const Row(
-
                                 mainAxisAlignment: MainAxisAlignment.center,
-
                                 children: [
-
                                   Text(
                                     "update profile",
                                     style: TextStyle(
@@ -203,12 +194,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-
                     ],
                   ),
                 ),
-
-
               ),
             ),
           ],

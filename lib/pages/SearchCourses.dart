@@ -138,7 +138,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                             ? Column(
                                 children: [
                                   SizedBox(
-                                    height: screenHeight/1.7,
+                                    height: screenHeight / 1.7,
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: courses!.length,
@@ -147,6 +147,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                                         return CourseItem(
                                           courseName: course.courseName,
                                           courseCode: course.courseCode,
+                                          courseID: course.courseID,
                                         );
                                       },
                                       physics:
