@@ -3,6 +3,9 @@ import 'package:class_mate/services/firestore_service.dart';
 import 'package:class_mate/Classes/Course.dart';
 import 'package:class_mate/widgets/CourseItem.dart';
 
+import '../Classes/User.dart';
+import '../services/authentication_service.dart';
+
 class SearchCourses extends StatefulWidget {
   const SearchCourses({Key? key}) : super(key: key);
 
@@ -40,9 +43,9 @@ class _SearchCoursesState extends State<SearchCourses> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Hi, Kareem',
-                  style: TextStyle(
+                Text(
+                  'Hi, ${thisuser!.displayName!}',
+                  style: const TextStyle(
                     color: Color(0xFF0F172A),
                     fontSize: 24,
                     fontFamily: 'Poppins',
@@ -134,7 +137,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                             ? Column(
                                 children: [
                                   SizedBox(
-                                    height: screenHeight * 0.55,
+                                    height: screenHeight/1.67,
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       itemCount: courses!.length,

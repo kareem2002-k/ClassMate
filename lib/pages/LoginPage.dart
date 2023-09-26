@@ -1,4 +1,4 @@
-import 'package:class_mate/pages/BottomNavBar.dart';
+import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -122,8 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 40),
                       const Padding(
                         padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: Text(
