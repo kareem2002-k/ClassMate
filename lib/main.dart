@@ -1,15 +1,16 @@
+import 'package:class_mate/pages/BottomNavBar.dart';
 import 'package:class_mate/pages/LandingPage.dart';
 import 'package:class_mate/pages/LoginPage.dart';
 import 'package:class_mate/pages/ProfilePage.dart';
-import 'package:class_mate/pages/AccountPage.dart';
 import 'package:class_mate/pages/SignUp.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:class_mate/pages/HomeScreen.dart';
 import 'services/authentication_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+
 
 
 Future<void> main() async {
@@ -21,19 +22,29 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  static final ValueNotifier<ThemeMode> themeNotifier =
+      ValueNotifier(ThemeMode.light);
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/sign_up': (context) => const SignUp(),
-        '/login': (context) => const LoginPage(),
-        '/profile': (context) => const ProfilePage(),
-      },
-      home: const AuthCheck(),
-    );
+    return ValueListenableBuilder<ThemeMode>(
+        valueListenable: themeNotifier,
+        builder: (_, ThemeMode currentMode, __) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(primarySwatch: Colors.indigo),
+            darkTheme: ThemeData.dark(),
+            themeMode: currentMode,
+            routes: {
+              '/sign_up': (context) => const SignUp(),
+              '/login': (context) => const LoginPage(),
+              '/profile': (context) => const ProfilePage(),
+            },
+            home: const AuthCheck(),
+          );
+        });
   }
 }
 
