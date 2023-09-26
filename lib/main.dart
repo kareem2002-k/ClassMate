@@ -6,7 +6,7 @@ import 'package:class_mate/pages/SignUp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:class_mate/pages/BottomNavBar.dart';
+import 'package:class_mate/pages/HomeScreen.dart';
 import 'services/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
