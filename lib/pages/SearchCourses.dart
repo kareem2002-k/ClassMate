@@ -1,9 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:class_mate/Classes/Course.dart';
 import 'package:class_mate/widgets/CourseItem.dart';
 
-import '../Classes/User.dart';
 import '../services/authentication_service.dart';
 
 class SearchCourses extends StatefulWidget {
@@ -28,6 +28,7 @@ class _SearchCoursesState extends State<SearchCourses> {
   Widget build(BuildContext context) {
     final EdgeInsets padding = MediaQuery.of(context).padding;
     final screenHeight = MediaQuery.of(context).size.height;
+    final User? user = AuthenticationService().currentUser;
 
     return Scaffold(
       body: Padding(
@@ -44,7 +45,7 @@ class _SearchCoursesState extends State<SearchCourses> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Hi, ${thisuser!.displayName!}',
+                  'Hi, ${user!.displayName!}',
                   style: const TextStyle(
                     color: Color(0xFF0F172A),
                     fontSize: 24,

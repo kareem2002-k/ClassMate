@@ -2,7 +2,6 @@ import 'package:class_mate/pages/ProfilePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../Classes/User.dart';
 import '../services/authentication_service.dart';
 import 'SettingsPage.dart';
 
@@ -11,7 +10,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final User? user = AuthenticationService().currentUser;
+    final User? user = AuthenticationService().currentUser;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -63,7 +62,7 @@ class SettingsPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            thisuser!.displayName!,
+                            user!.displayName!,
                             style: const TextStyle(
                               fontSize: 17,
                             ),
