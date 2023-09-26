@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../Classes/User.dart';
 import '../services/authentication_service.dart';
+import 'SettingsPage.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key});
@@ -125,6 +126,11 @@ class SettingsPage extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         // Handle the row tap action here
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => SettingPage(),
+                          ),
+                        ); // Handle the row tap action here
                       },
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
@@ -137,7 +143,8 @@ class SettingsPage extends StatelessWidget {
                             const SizedBox(width: 20),
                             const Text("Settings"),
                             const Spacer(),
-                            const Icon(Icons.navigate_next), // TODO: navigate to settings page
+                            const Icon(Icons
+                                .navigate_next), // TODO: navigate to settings page
                           ],
                         ),
                       ),
@@ -155,7 +162,9 @@ class SettingsPage extends StatelessWidget {
                               backgroundColor: Colors.grey[300],
                               child: const Icon(Icons.info),
                             ),
-                            const SizedBox(width: 20,),
+                            const SizedBox(
+                              width: 20,
+                            ),
                             const Text("About Us"),
                             const Spacer(),
                             const Icon(Icons.navigate_next),
@@ -167,7 +176,9 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 100,),
+            const SizedBox(
+              height: 100,
+            ),
             ButtonBar(
               children: [
                 TextButton(
