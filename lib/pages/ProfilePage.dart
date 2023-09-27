@@ -30,14 +30,12 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: AppBar(
-      //
       //   backgroundColor: Colors.white,
       //   iconTheme: IconThemeData(
       //     color: Colors.black, //change your color here
       //   ),
       //   elevation: 0,
       // ),
-
       body: Center(
         child: Stack(
           children: [
@@ -54,17 +52,17 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             // Back Arrow Button
-            Positioned(
-              top: 22,
-              left: 0,
-              child: IconButton(
-                iconSize: 33,
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
+            // Positioned(
+            //   top: 22,
+            //   left: 0,
+            //   child: IconButton(
+            //     iconSize: 33,
+            //     icon: Icon(Icons.arrow_back),
+            //     onPressed: () {
+            //       Navigator.of(context).pop();
+            //     },
+            //   ),
+            // ),
             Positioned(
               top: 130,
               bottom: 0,
