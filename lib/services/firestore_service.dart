@@ -30,7 +30,7 @@ class FirestoreService {
 
   //get a single course by ID
 
-  Future<Course?> getCourseById(String courseId, String userId) async {
+  Future<Course?> getCourseById(String courseId) async {
     try {
       final doc = await _firestore.collection('courses').doc(courseId).get();
 

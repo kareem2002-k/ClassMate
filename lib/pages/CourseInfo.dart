@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:class_mate/Classes/Course.dart';
+import 'package:class_mate/services/firestore_service.dart';
 
 class CourseInfo extends StatefulWidget {
-  const CourseInfo({super.key});
+  final String courseID;
+
+  const CourseInfo({
+    required this.courseID,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<CourseInfo> createState() => _CourseInfoState();
@@ -9,6 +16,35 @@ class CourseInfo extends StatefulWidget {
 
 class _CourseInfoState extends State<CourseInfo> {
   bool isCourseFollowed = false;
+  Course? course; // Variable to store the fetched course
+  final FirestoreService firestoreService =
+      FirestoreService(); // Initialize your FirestoreService
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch the course data using courseId from Firestore
+    fetchCourseData();
+  }
+
+  Future<void> fetchCourseData() async {
+    try {
+      final fetchedCourse = await firestoreService
+          .getCourseById(widget.courseID); // Fetch course data by courseId
+      if (fetchedCourse != null) {
+        setState(() {
+          course = fetchedCourse;
+          isCourseFollowed = course?.isFollowing ?? false;
+        });
+      } else {
+        // Handle if the course data is not found
+        print('Course not found');
+      }
+    } catch (e) {
+      // Handle any errors that occur during data fetching
+      print('Error fetching course data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +53,10 @@ class _CourseInfoState extends State<CourseInfo> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'OOP Course',
+        title: Text(
+          course != null && course?.courseName != null
+              ? course?.courseName ?? 'Loading...'
+              : 'Loading...', // Display course name when available
           style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
         ), // * fetch course name
         centerTitle: true,
@@ -57,16 +95,22 @@ class _CourseInfoState extends State<CourseInfo> {
                 child: Center(
                   child: Column(
                     children: [
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 50.0),
                         child: Text(
-                          'OOP Course',
+                          course != null && course?.courseName != null
+                              ? course?.courseName ??
+                                  'Loading...' // Display course name when available
+                              : 'Loading...',
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 30),
                         ), // * fetch course name
                       ),
                       Text(
-                        'CSE111 - Computer',
+                        course != null && course?.courseCode != null
+                            ? course?.courseCode ??
+                                'Loading...' // Display course code when available
+                            : 'Loading...',
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       ),
                       const SizedBox(
