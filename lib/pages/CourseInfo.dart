@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:class_mate/Classes/Course.dart';
 import 'package:class_mate/services/firestore_service.dart';
+import 'package:flutter/material.dart';
 
 class CourseInfo extends StatefulWidget {
   final String courseID;
@@ -193,10 +193,10 @@ class _CourseInfoState extends State<CourseInfo> {
                           height: 120.6663818359375,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
-                            color: const Color(0xff27487f),
+                            color: const Color(0xff79bca4),
                           ),
                           child: const Icon(
-                            Icons.school,
+                            Icons.apartment,
                             size: 50,
                             color: Colors.white,
                           ),
@@ -205,35 +205,10 @@ class _CourseInfoState extends State<CourseInfo> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text("Instructors"),
+                      const Text("Available Centers"),
                     ],
                   ),
                   // Third Option
-                ],
-              ),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      width: 118.50713348388672,
-                      height: 120.6663818359375,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: const Color(0xff79bca4),
-                      ),
-                      child: const Icon(
-                        Icons.apartment,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text("Available Centers"),
                 ],
               ),
             ],
