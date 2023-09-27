@@ -5,6 +5,7 @@ import 'package:class_mate/pages/LoginPage.dart';
 import 'AccountPage.dart';
 import 'SearchCourses.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
+import 'FavouritesPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     const SearchCourses(), // Your original home page content
+    const FavouritesPage(), // Add your FavouritesPage here
     const SettingsPage(), // Add your SettingsPage here
   ];
 
@@ -47,6 +49,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                     title: const Text(
                       'Home',
+                      style: TextStyle(
+                        fontSize: 16, // Adjust the font size as needed
+                        fontWeight:
+                            FontWeight.bold, // Adjust the font weight as needed
+                        color: Color(
+                            0xFF52B6DF), // Adjust the text color as needed
+                      ),
+                    ),
+                  ),
+                  FlashyTabBarItem(
+                    icon: const Icon(
+                      Icons.favorite,
+                      size: 30, // Adjust the size as needed
+                      color: Colors.grey, // Adjust the color as needed
+                    ),
+                    title: const Text(
+                      'Favourites',
                       style: TextStyle(
                         fontSize: 16, // Adjust the font size as needed
                         fontWeight:
