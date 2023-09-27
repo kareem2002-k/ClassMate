@@ -17,7 +17,7 @@ class _CourseInfoState extends State<CourseInfo> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.blueGrey[100],
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text(
             'OOP Course',
@@ -46,7 +46,7 @@ class _CourseInfoState extends State<CourseInfo> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(
                         40.0), // Adjust the border radius as needed
                     // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50),), // Adjust the border radius as needed
