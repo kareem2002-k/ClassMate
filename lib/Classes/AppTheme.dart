@@ -15,11 +15,16 @@ class AppTheme {
         appBarTheme: const AppBarTheme(color: AppColors.textBlack),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(color: AppColors.textGrey),
-          labelStyle: TextStyle(color: AppColors.white),
+          labelStyle: TextStyle(color: AppColors.darkPink),
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           // Define text styles for dark mode here
           headlineSmall: TextStyle(
+            color: Colors.black, // Change the text color for "Welcome"
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+          headlineMedium: TextStyle(
             color: Colors.white, // Change the text color for "Welcome"
             fontSize: 15,
             fontWeight: FontWeight.w400,
@@ -43,7 +48,12 @@ class AppTheme {
           headlineSmall: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
-            color: Colors.grey[500],
+            color: Colors.grey[800],
+          ),
+          headlineMedium: TextStyle(
+            color: Colors.grey[500], // Change the text color for "Welcome"
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
           ),
         ),
         canvasColor: AppColors.white,

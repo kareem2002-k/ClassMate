@@ -54,7 +54,7 @@ class SettingsPage extends StatelessWidget {
                         children: [
                           Text(
                             "Welcome",
-                            style: Theme.of(context).textTheme.headlineSmall,
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           const SizedBox(height: 5),
                           Text(

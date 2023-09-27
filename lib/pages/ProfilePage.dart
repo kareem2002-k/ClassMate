@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../services/authentication_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -8,9 +11,24 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final User? user = AuthenticationService().currentUser;
+  var name, university, faculty;
+
   @override
   Widget build(BuildContext context) {
+    name = user!.displayName!;
+    university = "Ain Shams";
+    faculty = "Engineering";
+    final TextEditingController _nameCont = TextEditingController(text: name);
+    final TextEditingController _emailCont =
+        TextEditingController(text: user!.email);
+    final TextEditingController _uniCont =
+        TextEditingController(text: university);
+    final TextEditingController _facultyCont =
+        TextEditingController(text: faculty);
+
     return Scaffold(
+      backgroundColor: Colors.white,
       // appBar: AppBar(
       //
       //   backgroundColor: Colors.white,
@@ -23,14 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Stack(
           children: [
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              color: Colors.white,
-
-              // Set the background color here
-            ),
-
             Positioned(
               top: 40,
               right: 0,
@@ -97,6 +107,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             hintText: 'Enter your Name',
                           ),
+                          controller: _nameCont,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -111,14 +122,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                         child: TextField(
+                          enabled: false,
                           // controller: passCont,
-
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             hintText: '',
                           ),
+                          controller: _emailCont,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -140,6 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             hintText: 'Ain shams',
                           ),
+                          controller: _uniCont,
                         ),
                       ), // Add spacing
                       const SizedBox(height: 20),
@@ -161,6 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             hintText: 'Engineering',
                           ),
+                          controller: _facultyCont,
                         ),
                       ),
                       const SizedBox(height: 10),
