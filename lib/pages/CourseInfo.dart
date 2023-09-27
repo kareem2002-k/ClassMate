@@ -118,24 +118,24 @@ class _CourseInfoState extends State<CourseInfo> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                             width: 118.50713348388672,
                             height: 120.6663818359375,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Color(0xff316d86),
+                              color: const Color(0xff316d86),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.book,
                               size: 50,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text("Study Material"),
+                        const Text("Study Material"),
                       ],
                     ),
                     // Instructors
@@ -144,24 +144,24 @@ class _CourseInfoState extends State<CourseInfo> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                             width: 118.50713348388672,
                             height: 120.6663818359375,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
-                              color: Color(0xff27487f),
+                              color: const Color(0xff27487f),
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.school,
                               size: 50,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Text("Instructors"),
+                        const Text("Instructors"),
                       ],
                     ),
                     // Third Option
@@ -172,24 +172,24 @@ class _CourseInfoState extends State<CourseInfo> {
                     GestureDetector(
                       onTap: () {},
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                         width: 118.50713348388672,
                         height: 120.6663818359375,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Color(0xff79bca4),
+                          color: const Color(0xff79bca4),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.apartment,
                           size: 50,
                           color: Colors.white,
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Text("Available Centers"),
+                    const Text("Available Centers"),
                   ],
                 ),
               ],
