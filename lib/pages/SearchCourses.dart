@@ -1,8 +1,8 @@
+import 'package:class_mate/Classes/Course.dart';
+import 'package:class_mate/services/firestore_service.dart';
+import 'package:class_mate/widgets/CourseItem.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:class_mate/services/firestore_service.dart';
-import 'package:class_mate/Classes/Course.dart';
-import 'package:class_mate/widgets/CourseItem.dart';
 
 import '../services/authentication_service.dart';
 
@@ -82,12 +82,13 @@ class _SearchCoursesState extends State<SearchCourses> {
                       color: Colors.grey,
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Search',
                         border: InputBorder.none,
                       ),
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                   IconButton(
