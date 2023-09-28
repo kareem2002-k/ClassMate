@@ -21,8 +21,10 @@ class CourseItem extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => CourseInfo(
-                courseID:
-                    this.courseID), // Replace with your CourseInfoScreen widget
+                courseID: this.courseID,
+                courseName: this.courseName,
+                courseCode: this
+                    .courseCode), // Replace with your CourseInfoScreen widget
           ),
         );
       },
