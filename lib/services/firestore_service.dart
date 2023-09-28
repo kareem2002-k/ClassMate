@@ -28,33 +28,16 @@ class FirestoreService {
     }
   }
 
-  //get a single course by ID
+  //func to check if the user is following a course or not
 
-  Future<Course?> getCourseById(String courseId) async {
+  Future<bool> isFollowingCourse(String courseId) async {
     try {
-      final doc = await _firestore.collection('courses').doc(courseId).get();
+      final userFollowing = await getUserFollowing();
 
-      if (doc.exists) {
-        final courseData = doc.data();
-
-        final userFollowing = await getUserFollowing();
-
-        final isFollowing = userFollowing.contains(courseId);
-
-        final course = Course(
-          courseName: courseData!['courseName'],
-          courseCode: courseData!['courseCode'],
-          courseID: doc.id,
-          isFollowing: isFollowing,
-        );
-
-        return course;
-      }
-
-      return null; // Course not found
+      return userFollowing.contains(courseId);
     } catch (e) {
-      print('Error fetching course data: $e');
-      return null;
+      print('Error fetching user following data: $e');
+      return false; // Handle the error and return false
     }
   }
 
@@ -100,6 +83,25 @@ class FirestoreService {
     } catch (e) {
       print('Error fetching user following data: $e');
       return []; // Handle the error and return an empty list
+    }
+  }
+
+  // toggle follow or unfollow a course
+  Future<void> toggleFollowCourse(String courseId) async {
+    try {
+      final isFollowing = await isFollowingCourse(courseId);
+
+      if (isFollowing) {
+        await _firestore.collection('users').doc(currentUserId).update({
+          'followed_courses': FieldValue.arrayRemove([courseId])
+        });
+      } else {
+        await _firestore.collection('users').doc(currentUserId).update({
+          'followed_courses': FieldValue.arrayUnion([courseId])
+        });
+      }
+    } catch (e) {
+      print('Error toggling follow course: $e');
     }
   }
 }

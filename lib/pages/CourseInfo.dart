@@ -1,12 +1,15 @@
-import 'package:class_mate/Classes/Course.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 
 class CourseInfo extends StatefulWidget {
   final String courseID;
+  final String courseName;
+  final String courseCode;
 
   const CourseInfo({
     required this.courseID,
+    required this.courseName,
+    required this.courseCode,
     Key? key,
   }) : super(key: key);
 
@@ -16,34 +19,27 @@ class CourseInfo extends StatefulWidget {
 
 class _CourseInfoState extends State<CourseInfo> {
   bool isCourseFollowed = false;
-  Course? course; // Variable to store the fetched course
   final FirestoreService firestoreService =
       FirestoreService(); // Initialize your FirestoreService
+
+  Future<bool> fetchCourseData() async {
+    try {
+      return await firestoreService.isFollowingCourse(widget.courseID);
+    } catch (e) {
+      print('Error fetching course data: $e');
+      return false; // Return false in case of an error
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     // Fetch the course data using courseId from Firestore
-    fetchCourseData();
-  }
-
-  Future<void> fetchCourseData() async {
-    try {
-      final fetchedCourse = await firestoreService
-          .getCourseById(widget.courseID); // Fetch course data by courseId
-      if (fetchedCourse != null) {
-        setState(() {
-          course = fetchedCourse;
-          isCourseFollowed = course?.isFollowing ?? false;
-        });
-      } else {
-        // Handle if the course data is not found
-        print('Course not found');
-      }
-    } catch (e) {
-      // Handle any errors that occur during data fetching
-      print('Error fetching course data: $e');
-    }
+    fetchCourseData().then((isFollowing) {
+      setState(() {
+        isCourseFollowed = isFollowing;
+      });
+    });
   }
 
   @override
@@ -54,18 +50,15 @@ class _CourseInfoState extends State<CourseInfo> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          course != null && course?.courseName != null
-              ? course?.courseName ?? 'Loading...'
-              : 'Loading...', // Display course name when available
-          style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
-        ), // * fetch course name
+          widget.courseName, // Display course name when available
+          style: const TextStyle(color: Colors.black, fontFamily: 'Poppins'),
+        ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(
-          color: Colors.black, // Change this color to the color you desire
+        iconTheme: const IconThemeData(
+          color: Colors.black,
         ),
-        // backgroundColor: Colors.white,
-        elevation: 0, // Set the elevation to 0 to remove any shadow
+        elevation: 0,
         actions: const <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 8.0),
@@ -86,9 +79,7 @@ class _CourseInfoState extends State<CourseInfo> {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(
-                      40.0), // Adjust the border radius as needed
-                  // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50),), // Adjust the border radius as needed
+                  borderRadius: BorderRadius.circular(40.0),
                 ),
                 width: width - 50,
                 height: 250,
@@ -96,58 +87,139 @@ class _CourseInfoState extends State<CourseInfo> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 50.0),
+                        padding: const EdgeInsets.only(top: 50.0),
                         child: Text(
-                          course != null && course?.courseName != null
-                              ? course?.courseName ??
-                                  'Loading...' // Display course name when available
-                              : 'Loading...',
-                          style: TextStyle(
+                          widget.courseName,
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 30),
-                        ), // * fetch course name
+                        ),
                       ),
                       Text(
-                        course != null && course?.courseCode != null
-                            ? course?.courseCode ??
-                                'Loading...' // Display course code when available
-                            : 'Loading...',
+                        widget.courseCode,
                         style: TextStyle(fontSize: 15, color: Colors.grey[700]),
                       ),
                       const SizedBox(
                         height: 25,
                       ),
-                      Container(
-                        height: 40,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: const Color.fromARGB(255, 211, 220,
-                                230), // Specify your desired border color here
-                            width:
-                                1.5, // Specify your desired border width here
-                          ),
-                          borderRadius: BorderRadius.circular(
-                              32.0), // Adjust the border radius as needed
-                        ),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            backgroundColor:
-                                const Color.fromARGB(255, 233, 240, 255),
-                            foregroundColor: Colors.black,
-                          ),
-                          onPressed: () {
-                            // * toggle follow or unfollow
-                            setState(() {
-                              isCourseFollowed = !isCourseFollowed;
-                            });
-                          },
-                          child: Text(
-                            isCourseFollowed ? 'Unfollow' : 'Follow',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
-                          ),
-                        ),
+                      FutureBuilder<bool>(
+                        future: fetchCourseData(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            // Loading indicator
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError || !snapshot.data!) {
+                            // Error message or Follow button (assuming false indicates not following)
+                            return Container(
+                              height: 40,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 211, 220, 230),
+                                  width: 1.5,
+                                ),
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 233, 240, 255),
+                                  foregroundColor: Colors.black,
+                                ),
+                                onPressed: () async {
+                                  // * Prevent button click while fetching
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return;
+                                  }
+
+                                  // * Toggle follow or unfollow
+                                  final isFollowing = snapshot.data ?? false;
+                                  setState(() {
+                                    isCourseFollowed = !isFollowing;
+                                  });
+
+                                  // * Update the Firestore and handle errors
+                                  try {
+                                    await firestoreService
+                                        .toggleFollowCourse(widget.courseID);
+                                  } catch (e) {
+                                    print('Error toggling follow status: $e');
+                                    // Handle the error (e.g., show an error message)
+                                    setState(() {
+                                      isCourseFollowed =
+                                          !isFollowing; // Revert the state
+                                    });
+                                  }
+                                },
+                                child: Text(
+                                  isCourseFollowed ? 'Unfollow' : 'Follow',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            );
+                          } else {
+                            // Follow button (assuming true indicates following)
+                            return Container(
+                              height: 40,
+                              width: 180,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 211, 220, 230),
+                                  width: 1.5,
+                                ),
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder(),
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 233, 240, 255),
+                                  foregroundColor: Colors.black,
+                                ),
+                                onPressed: () async {
+                                  // * Prevent button click while fetching
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return;
+                                  }
+
+                                  // * Toggle follow or unfollow
+                                  final isFollowing = snapshot.data ?? false;
+                                  setState(() {
+                                    isCourseFollowed = !isFollowing;
+                                  });
+
+                                  // * Update the Firestore and handle errors
+                                  try {
+                                    await firestoreService
+                                        .toggleFollowCourse(widget.courseID);
+                                  } catch (e) {
+                                    print('Error toggling follow status: $e');
+                                    // Handle the error (e.g., show an error message)
+                                    setState(() {
+                                      isCourseFollowed =
+                                          !isFollowing; // Revert the state
+                                    });
+                                  }
+                                },
+                                child: Text(
+                                  isCourseFollowed ? 'Unfollow' : 'Follow',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -210,7 +282,7 @@ class _CourseInfoState extends State<CourseInfo> {
                   ),
                   // Third Option
                 ],
-              ),
+              )
             ],
           ),
         ),
