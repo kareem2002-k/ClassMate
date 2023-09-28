@@ -1,7 +1,7 @@
+import 'package:class_mate/widgets/FollowedCourseItem.dart';
 import 'package:flutter/material.dart';
 import 'package:class_mate/Classes/Course.dart'; // Assuming Course class is defined here
 import 'package:class_mate/services/firestore_service.dart';
-import 'package:class_mate/widgets/CourseItem.dart';
 
 class FavouritesPage extends StatefulWidget {
   const FavouritesPage({Key? key}) : super(key: key);
@@ -40,10 +40,11 @@ class _FavouritesPageState extends State<FavouritesPage> {
                     itemCount: followingCourses.length,
                     itemBuilder: (context, index) {
                       final course = followingCourses[index];
-                      return CourseItem(
+                      return FollowedCourseItem(
                         courseName: course.courseName,
                         courseCode: course.courseCode,
                         courseID: course.courseID,
+                        isFollowed: true,
                       );
                     },
                   ),
