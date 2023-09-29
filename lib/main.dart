@@ -10,13 +10,14 @@ import 'package:flutter/material.dart';
 import 'Classes/AppTheme.dart';
 import 'firebase_options.dart';
 import 'services/authentication_service.dart';
+import 'services/notifications_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  //await NotificationsService().initNotifications();
+  await NotificationsService().initNotifications();
   runApp(const MyApp());
 }
 
