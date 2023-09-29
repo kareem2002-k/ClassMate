@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:class_mate/pages/CourseInfo.dart';
 
-class CourseItem extends StatelessWidget {
+class FollowedCourseItem extends StatelessWidget {
   final String courseName;
   final String courseCode;
   final String courseID;
+  final bool isFollowed; // Add this property
 
-  const CourseItem({
+  const FollowedCourseItem({
     required this.courseName,
     required this.courseCode,
     required this.courseID,
+    required this.isFollowed,
     Key? key,
   }) : super(key: key);
 
@@ -21,10 +23,10 @@ class CourseItem extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => CourseInfo(
-                courseID: this.courseID,
-                courseName: this.courseName,
-                courseCode: this
-                    .courseCode), // Replace with your CourseInfoScreen widget
+              courseID: this.courseID,
+              courseName: this.courseName,
+              courseCode: this.courseCode,
+            ),
           ),
         );
       },
@@ -32,8 +34,12 @@ class CourseItem extends StatelessWidget {
         width: double.infinity,
         margin: const EdgeInsets.only(bottom: 16.0),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment(0.70, -0.72),
+            end: Alignment(-0.7, 0.72),
+            colors: [Color(0xFF8A78FF), Color(0xFF5451D6)],
+          ),
+          borderRadius: BorderRadius.circular(16), // Adjusted border radius
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -42,11 +48,12 @@ class CourseItem extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Padding(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +61,7 @@ class CourseItem extends StatelessWidget {
                     Text(
                       courseName,
                       style: const TextStyle(
-                        color: Color(0xFF132440),
+                        color: Colors.white,
                         fontSize: 18,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w600,
@@ -64,7 +71,7 @@ class CourseItem extends StatelessWidget {
                     Text(
                       courseCode,
                       style: const TextStyle(
-                        color: Color(0xFF64748B),
+                        color: Colors.white,
                         fontSize: 14,
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
@@ -73,31 +80,30 @@ class CourseItem extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Container(
-                width: 50,
-                height: 120, // Increased height
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    topLeft:
-                        Radius.circular(20), // Added to make it a full capsule
-                    bottomLeft:
-                        Radius.circular(20), // Added to make it a full capsule
+              Container(
+                padding: const EdgeInsets.only(right: 16.0, bottom: 16.0),
+                child: Container(
+                  width: 120, // Adjusted width
+                  height: 40, // Adjusted height
+                  decoration: BoxDecoration(
+                    color: isFollowed
+                        ? const Color(0xFF42A5F5) // Followed color
+                        : const Color(0xFFE57373), // Unfollowed color
+                    borderRadius: BorderRadius.circular(20), // Rounded button
+                  ),
+                  child: Center(
+                    child: Text(
+                      isFollowed ? 'Following' : 'Follow',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-                child: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.black,
-                  size: 24,
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

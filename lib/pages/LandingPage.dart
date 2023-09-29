@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:class_mate/pages/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'LoginPage.dart';
 
@@ -18,20 +18,68 @@ class _LandingPageState extends State<LandingPage> {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body:
-      InkWell(
-          child: Container(
-            width: width,
-            height: height,
-            color: const Color.fromARGB(255, 189, 217, 255),
-            child: Center(
-              child: Image.asset("assets/images/classmate2.jpg", scale: 2,),
+      backgroundColor: Color(0xFF7BB4E3),
+      body:Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Welcome to \nClassmate',
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          onTap: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
-            // TODO: see of you can add animation in the transition
-          },
+            Text('Your Way to A+',
+              style:TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+            SizedBox(height: 0),
+            Image.asset(
+              'assets/images/classmate1.png',
+              width: 450,
+              height: 350,
+            ),
+            SizedBox(height: 0), // Adjust spacing as needed
+            SizedBox(
+              width: 296,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+
+                },
+                child: Text(
+                  'Let\'s go',
+                  style: TextStyle(color: Colors.white,fontSize: 24,),
+
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUp()),
+                );
+              },
+              child: Text('Continue as Guest',
+                style: TextStyle(color: Colors.black),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

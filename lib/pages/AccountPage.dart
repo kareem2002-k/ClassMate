@@ -54,11 +54,7 @@ class SettingsPage extends StatelessWidget {
                         children: [
                           Text(
                             "Welcome",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
+                            style: Theme.of(context).textTheme.headlineMedium,
                           ),
                           const SizedBox(height: 5),
                           Text(
