@@ -1,4 +1,4 @@
-import 'package:class_mate/pages/CourseInfo.dart';
+import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/pages/LandingPage.dart';
 import 'package:class_mate/pages/LoginPage.dart';
 import 'package:class_mate/pages/ProfilePage.dart';
@@ -7,17 +7,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'package:class_mate/pages/HomeScreen.dart';
-import 'services/authentication_service.dart';
+import 'Classes/AppTheme.dart';
 import 'firebase_options.dart';
-
-
+import 'services/authentication_service.dart';
+import 'services/notifications_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationsService().initNotifications();
   runApp(const MyApp());
 }
 
@@ -34,8 +34,8 @@ class MyApp extends StatelessWidget {
         builder: (_, ThemeMode currentMode, __) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(primarySwatch: Colors.indigo),
-            darkTheme: ThemeData.dark(),
+            theme: AppTheme().lightTheme,
+            darkTheme: AppTheme().darkTheme,
             themeMode: currentMode,
             routes: {
               '/sign_up': (context) => const SignUp(),
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               '/profile': (context) => const ProfilePage(),
             },
             // home: const AuthCheck(),
-            home: const LandingPage(),
+            home: const AuthCheck(),
           );
         });
   }

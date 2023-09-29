@@ -1,8 +1,8 @@
+import 'package:class_mate/Classes/Course.dart';
+import 'package:class_mate/services/firestore_service.dart';
+import 'package:class_mate/widgets/CourseItem.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:class_mate/services/firestore_service.dart';
-import 'package:class_mate/Classes/Course.dart';
-import 'package:class_mate/widgets/CourseItem.dart';
 
 import '../services/authentication_service.dart';
 
@@ -55,15 +55,29 @@ class _SearchCoursesState extends State<SearchCourses> {
                       height: 1.2,
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      // Add your notification button action here
-                    },
-                    child: Image.asset(
-                      'assets/icon/bell.png',
-                      width: 24,
-                      height: 24,
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        border: InputBorder.none,
+                      ),
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.filter_list,
+                      color: Color(0xFF7BB4E3),
+                    ),
+                    onPressed: () {
+                      // Handle filter button press
+                    },
+                    // child: Image.asset(
+                    //   'assets/icon/bell.png',
+                    //   width: 24,
+                    //   height: 24,
+                    // ),
+                    //TODO: whose child is this???
                   ),
                 ],
               ),
@@ -123,13 +137,15 @@ class _SearchCoursesState extends State<SearchCourses> {
                   ? FutureBuilder<List<Course>>(
                       future: firestoreService.getAllCourses(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(
                               child:
                                   CircularProgressIndicator()); // Show a loading indicator while fetching data
                         } else if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
-                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
                           return const Text(
                               'No courses available.'); // Handle the case when no courses are available
                         } else {
@@ -139,7 +155,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                               ? Column(
                                   children: [
                                     SizedBox(
-                                      height: screenHeight/1.7,  //!
+                                      height: screenHeight / 1.7, //!
                                       child: ListView.builder(
                                         shrinkWrap: true,
                                         itemCount: courses!.length,
@@ -148,6 +164,7 @@ class _SearchCoursesState extends State<SearchCourses> {
                                           return CourseItem(
                                             courseName: course.courseName,
                                             courseCode: course.courseCode,
+                                            courseID: course.courseID,
                                           );
                                         },
                                         // physics:
