@@ -1,3 +1,4 @@
+import 'package:class_mate/pages/AvailableCenters.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 
@@ -258,7 +259,15 @@ class _CourseInfoState extends State<CourseInfo> {
                   Column(
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => AvailableCenters(
+                                courseID: '',
+                              ), // Replace with your CourseInfoScreen widget
+                            ),
+                          );
+                        },
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                           width: 118.50713348388672,
