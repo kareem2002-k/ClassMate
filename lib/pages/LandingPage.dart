@@ -25,7 +25,27 @@ class _LandingPageState extends State<LandingPage> {
             height: height,
             color: const Color.fromARGB(255, 189, 217, 255),
             child: Center(
-              child: Image.asset("assets/images/classmate2.jpg", scale: 2,),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: height/3.8,),
+                  Center(
+                    child: Image.asset("assets/images/classmate2.jpg", scale: 2,),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Container(
+                      width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(40.0), // Adjust the border radius as needed
+                          // borderRadius: BorderRadius.only(bottomLeft: Radius.circular(50), bottomRight: Radius.circular(50),), // Adjust the border radius as needed
+                        ),
+                        child: const Center(child: Text("Tap anywhere!", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),))),
+                  )
+                ],
+              ),
             ),
           ),
           onTap: (){

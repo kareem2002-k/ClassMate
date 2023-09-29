@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               '/profile': (context) => const ProfilePage(),
             },
             // home: const AuthCheck(),
-            home: const CourseInfo(),
+            home: const LandingPage(),
           );
         });
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../services/firestore_service.dart';
 
 class CourseInfo extends StatefulWidget {
-  const CourseInfo({super.key});
+  final String courseName;
+  final String courseCode;
+  const CourseInfo({super.key, required this.courseName, required this.courseCode});
 
   @override
   State<CourseInfo> createState() => _CourseInfoState();
@@ -9,6 +12,7 @@ class CourseInfo extends StatefulWidget {
 
 class _CourseInfoState extends State<CourseInfo> {
   bool isCourseFollowed = false;
+  final firestoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class _CourseInfoState extends State<CourseInfo> {
       home: Scaffold(
         backgroundColor: Colors.blueGrey[100],
         appBar: AppBar(
-          title: const Text('OOP Course', style: TextStyle(color: Colors.black, fontFamily: 'Poppins'),), // * fetch course name
+          title: Text(widget.courseName, style: const TextStyle(color: Colors.black, fontFamily: 'Poppins'),), // * fetch course name
           centerTitle: true,
           backgroundColor: Colors.transparent,
           // backgroundColor: Colors.white,
@@ -46,11 +50,11 @@ class _CourseInfoState extends State<CourseInfo> {
                 child: Center(
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 50.0),
-                        child: Text('OOP Course', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),), // * fetch course name
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50.0),
+                        child: Text(widget.courseName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),), // * fetch course name
                       ),
-                      Text('CSE111 - Computer', style: TextStyle(fontSize: 15, color: Colors.grey[700]),),
+                      Text('${widget.courseCode} - CESS', style: TextStyle(fontSize: 15, color: Colors.grey[700]),),
                       const SizedBox(height: 25,),
                       Container(
                         height: 40,
