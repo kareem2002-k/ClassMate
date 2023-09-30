@@ -61,12 +61,7 @@ class _PushNotificationState extends State<PushNotification> {
               ),
               SizedBox(height: 32.0),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _formKey.currentState!.save();
-                    sendNotification(_selectedTopic, _notificationMessage);
-                  }
-                },
+                onPressed: () {},
                 child: Text('Send Notification'),
               ),
             ],
@@ -74,14 +69,5 @@ class _PushNotificationState extends State<PushNotification> {
         ),
       ),
     );
-  }
-
-  // Replace this function with your actual notification sending logic
-  void sendNotification(String topic, String message) {
-    // Implement your notification sending logic here
-    // You can use Firebase Cloud Messaging (FCM) or another service to send the notification
-    // Remember to handle errors and provide feedback to the user
-    // For demonstration purposes, we'll print the message to the console
-    print('Sending notification to topic: $topic with message: $message');
   }
 }
