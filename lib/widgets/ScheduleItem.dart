@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CenterItem extends StatelessWidget {
-  final String centerName;
+class ScheduleItem extends StatelessWidget {
   final String centerID;
-  final String contactEmail;
-  final String contactPhone;
-  final String location;
+  final String centerName;
+  final String instructorName;
+  final String courseDate;
+  final String courseTime;
 
-  const CenterItem({
-    required this.centerName,
+  const ScheduleItem({
     required this.centerID,
-    required this.contactEmail,
-    required this.contactPhone,
-    required this.location,
+    required this.centerName,
+    required this.instructorName,
+    required this.courseDate,
+    required this.courseTime,
     Key? key,
   }) : super(key: key);
 
@@ -40,7 +40,27 @@ class CenterItem extends StatelessWidget {
             ),
           ),
           Text(
-            'Course Time: $contactEmail',
+            'Instructor: $instructorName',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.black,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          Text(
+            'Course Date: $courseDate',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.black,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          Text(
+            'Course Time: $courseTime',
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontWeight: FontWeight.bold,

@@ -2,6 +2,7 @@ import 'package:class_mate/Classes/Course.dart';
 import 'package:class_mate/Classes/Center.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:class_mate/widgets/CourseItem.dart';
+import 'package:class_mate/widgets/CenterItem.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -133,7 +134,8 @@ class _SearchCoursesState extends State<SearchCourses> {
                 ],
               ),
               const SizedBox(height: 16.0),
-              _isCoursesSelected ? FutureBuilder<List<Course>>(
+              _isCoursesSelected
+                  ? FutureBuilder<List<Course>>(
                       future: firestoreService.getAllCourses(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
@@ -151,72 +153,72 @@ class _SearchCoursesState extends State<SearchCourses> {
                           final courses = snapshot.data;
 
                           return Column(
-                                  children: [
-                                    SizedBox(
-                                      height: screenHeight / 1.7, //!
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: courses!.length,
-                                        itemBuilder: (context, index) {
-                                          final course = courses[index];
-                                          return CourseItem(
-                                            courseName: course.courseName,
-                                            courseCode: course.courseCode,
-                                            courseID: course.courseID,
-                                          );
-                                        },
-                                        // physics:
-                                        //     const AlwaysScrollableScrollPhysics(), // Set this property
-                                      ),
-                                    ),
-                                  ],
-                                );
+                            children: [
+                              SizedBox(
+                                height: screenHeight / 1.7, //!
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: courses!.length,
+                                  itemBuilder: (context, index) {
+                                    final course = courses[index];
+                                    return CourseItem(
+                                      courseName: course.courseName,
+                                      courseCode: course.courseCode,
+                                      courseID: course.courseID,
+                                    );
+                                  },
+                                  // physics:
+                                  //     const AlwaysScrollableScrollPhysics(), // Set this property
+                                ),
+                              ),
+                            ],
+                          );
                         }
                       },
                     )
                   : FutureBuilder<List<CenterOBJ>>(
-                future: firestoreService.getAllCenters(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Center(
-                        child:
-                        CircularProgressIndicator()); // Show a loading indicator while fetching data
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (!snapshot.hasData ||
-                      snapshot.data!.isEmpty) {
-                    return const Text(
-                        'No centers available.'); // Handle the case when no courses are available
-                  } else {
-                    final centers = snapshot.data;
+                      future: firestoreService.getAllCenters(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child:
+                                  CircularProgressIndicator()); // Show a loading indicator while fetching data
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Text(
+                              'No centers available.'); // Handle the case when no courses are available
+                        } else {
+                          final centers = snapshot.data;
 
-                    return Column(
-                      children: [
-                        SizedBox(
-                          height: screenHeight / 1.7, //!
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: centers!.length,
-                            itemBuilder: (context, index) {
-                              final center = centers[index];
-                              return CenterItem(
-                                centerName: center.centerName,
-                                // contactEmail: data['contactEmail'],
-                                // contactPhone: data['contactPhone'],
-                                // location: data['location'],
-                                // coursesOffered: data['coursesOffered'],
-                              );
-                            },
-                            // physics:
-                            //     const AlwaysScrollableScrollPhysics(), // Set this property
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                },
-              )
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: screenHeight / 1.7, //!
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: centers!.length,
+                                  itemBuilder: (context, index) {
+                                    final center = centers[index];
+                                    return CenterItem(
+                                      centerName: center.centerName,
+                                      centerID: center.centerID,
+                                      contactEmail: center.contactEmail,
+                                      contactPhone: center.contactPhone,
+                                      location: center.location,
+                                    );
+                                  },
+                                  // physics:
+                                  //     const AlwaysScrollableScrollPhysics(), // Set this property
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
+                    )
             ],
           ),
         ),
