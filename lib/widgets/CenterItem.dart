@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
 class CenterItem extends StatelessWidget {
-  final String centerID;
   final String centerName;
-  final String instructorName;
-  final String courseDate;
-  final String courseTime;
+  final String centerID;
+  final String contactEmail;
+  final String contactPhone;
+  final String location;
+  late List<String> coursesOffered;
+  // final String instructorName;
+  // final String courseDate;
+  // final String courseTime;
 
   const CenterItem({
-    required this.centerID,
     required this.centerName,
-    required this.instructorName,
-    required this.courseDate,
-    required this.courseTime,
+    required this.centerID,
+    required this.contactEmail,
+    required this.contactPhone,
+    required this.location,
+    required this.coursesOffered,
+    // required this.instructorName,
+    // required this.courseDate,
+    // required this.courseTime,
     Key? key,
   }) : super(key: key);
 

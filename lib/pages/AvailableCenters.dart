@@ -17,7 +17,7 @@ class _AvailableCentersState extends State<AvailableCenters> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
