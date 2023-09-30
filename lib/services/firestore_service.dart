@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:class_mate/Classes/Course.dart';
 import 'authentication_service.dart';
+import 'notifications_service.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthenticationService _authenticationService = AuthenticationService();
+  final NotificationsService _notificationsService = NotificationsService();
 
   //current user
   String get currentUserId => _authenticationService.currentUser!.uid;
@@ -92,10 +94,12 @@ class FirestoreService {
       final isFollowing = await isFollowingCourse(courseId);
 
       if (isFollowing) {
+        _notificationsService.unsubscribeFromTopic(courseId);
         await _firestore.collection('users').doc(currentUserId).update({
           'followed_courses': FieldValue.arrayRemove([courseId])
         });
       } else {
+        _notificationsService.subscribeToTopic(courseId);
         await _firestore.collection('users').doc(currentUserId).update({
           'followed_courses': FieldValue.arrayUnion([courseId])
         });

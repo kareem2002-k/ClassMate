@@ -1,3 +1,4 @@
+import 'package:class_mate/pages/CourseInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:class_mate/pages/CourseInfo.dart';
 
@@ -90,10 +91,20 @@ class CourseItem extends StatelessWidget {
                         Radius.circular(20), // Added to make it a full capsule
                   ),
                 ),
-                child: const Icon(
-                  Icons.arrow_forward,
+                child: IconButton(
                   color: Colors.black,
-                  size: 24,
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CourseInfo(
+                                  courseName: courseName,
+                                  courseCode: courseCode,
+                                  courseID: courseID,
+                                ))); // TODO: may need to replace this with routing
+                  }, // TODO: course page all show same course
+                  //! we can temporarily just send the course info to course page but i would like to know how to access it directly
+                  icon: const Icon(Icons.arrow_forward),
                 ),
               ),
             ),
