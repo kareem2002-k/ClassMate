@@ -1,6 +1,6 @@
+import 'package:class_mate/pages/AvailableCenters.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:flutter/material.dart';
-import '../services/firestore_service.dart';
 
 class CourseInfo extends StatefulWidget {
   final String courseID;
@@ -52,27 +52,23 @@ class _CourseInfoState extends State<CourseInfo> {
       home: Scaffold(
         backgroundColor: Colors.blueGrey[100],
         appBar: AppBar(
-            title: Text(
-              widget.courseName,
-              style:
-                  const TextStyle(color: Colors.black, fontFamily: 'Poppins'),
-            ), // * fetch course name
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            // backgroundColor: Colors.white,
-            elevation: 0, // Set the elevation to 0 to remove any shadow
-            actions: const <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 8.0),
-                child: Icon(
-                  Icons.menu_book_outlined,
-                  color: Colors.black,
-                ),
-              )
-            ]),
-        // iconTheme: const IconThemeData(
-        //   color: Colors.black,
-        // ),
+          title: Text(
+            widget.courseName,
+            style: const TextStyle(color: Colors.black, fontFamily: 'Poppins'),
+          ), // * fetch course name
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0, // Set the elevation to 0 to remove any shadow
+          actions: const <Widget>[
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.menu_book_outlined,
+                color: Colors.black,
+              ),
+            )
+          ],
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -263,7 +259,15 @@ class _CourseInfoState extends State<CourseInfo> {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => AvailableCenters(
+                                  courseID: '',
+                                ), // Replace with your CourseInfoScreen widget
+                              ),
+                            );
+                          },
                           child: Container(
                             margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                             width: 118.50713348388672,
