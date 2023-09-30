@@ -4,7 +4,6 @@ class CenterOBJ {
   final String contactEmail;
   final String contactPhone;
   final String location;
-  late List<String> coursesOffered;
 
   CenterOBJ({
     required this.centerName,
@@ -12,6 +11,5 @@ class CenterOBJ {
     required this.contactEmail,
     required this.contactPhone,
     required this.location,
-    required this.coursesOffered,
   });
 }

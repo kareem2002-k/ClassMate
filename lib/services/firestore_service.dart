@@ -34,19 +34,22 @@ class FirestoreService {
     }
   }
 
-  // get all centers
   Future<List<CenterOBJ>> getAllCenters() async {
     try {
       final querySnapshot = await _firestore.collection('centers').get();
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
+        //TODO : understand this
         return CenterOBJ(
-          centerName: data['centerName'],
-          contactEmail: data['contactEmail'],
-          contactPhone: data['contactPhone'],
-          location: data['location'],
-          coursesOffered: data['coursesOffered'],
+          centerName: data['centerName'] ??
+              '', // Provide a default value if 'centerName' is null
           centerID: doc.id,
+          contactEmail: data['contactEmail'] ??
+              '', // Provide a default value if 'contactEmail' is null
+          contactPhone: data['contactPhone'] ??
+              '', // Provide a default value if 'contactPhone' is null
+          location: data['location'] ??
+              '', // Provide a default value if 'location' is null
         );
       }).toList();
     } catch (e) {
