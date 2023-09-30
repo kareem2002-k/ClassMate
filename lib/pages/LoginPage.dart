@@ -56,17 +56,17 @@ class _LoginPageState extends State<LoginPage> {
       DeviceOrientation.portraitDown,
     ]);
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             body: SingleChildScrollView(
               child: Center(
                 child: Column(
                   children: [
-                    SafeArea(
+                    const SafeArea(
                       child: SizedBox(
                         width: 300, // Adjust the width as needed
                         height: 200, // Adjust the height as needed
-                        child: const Image(
+                        child: Image(
                           image: AssetImage(
                               'assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
                         ),
