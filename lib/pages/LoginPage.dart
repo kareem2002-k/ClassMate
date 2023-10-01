@@ -1,6 +1,7 @@
 import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:class_mate/widgets/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,6 +13,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // function to implement the google signin
+
+// creating firebase instance
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
   Color myColor = const Color.fromRGBO(179, 121, 223, 0.2);
   Color signup = const Color.fromRGBO(180, 170, 242, 100);
   final emailCont = TextEditingController();
@@ -49,6 +55,33 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Future<void> _handleGoogleLogin() async {
+    setState(() => loading = true);
+    String? result = await AuthenticationService().signInWithGoogle();
+
+    // Dismiss the loading page
+    setState(() => loading = false);
+
+    if (result == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error: $result"),
+        ),
+      );
+    } else {
+      // Navigate to the home page and replace the current route
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+      // Remove the previous routes from the stack
+      Navigator.of(context).removeRoute(
+        ModalRoute.of(context)!,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -56,17 +89,17 @@ class _LoginPageState extends State<LoginPage> {
       DeviceOrientation.portraitDown,
     ]);
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             body: SingleChildScrollView(
               child: Center(
                 child: Column(
                   children: [
-                    SafeArea(
+                    const SafeArea(
                       child: SizedBox(
                         width: 300, // Adjust the width as needed
                         height: 200, // Adjust the height as needed
-                        child: const Image(
+                        child: Image(
                           image: AssetImage(
                               'assets/images/support, technology, error _ deadline, stress, man, customer service.png'),
                         ),
@@ -265,10 +298,7 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(12.0)),
                                 child: MaterialButton(
                                   onPressed: () async {
-                                    if (_formKey.currentState!.validate()) {
-                                      print(emailCont.text);
-                                      print(passCont.text);
-                                    }
+                                    await _handleGoogleLogin();
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
