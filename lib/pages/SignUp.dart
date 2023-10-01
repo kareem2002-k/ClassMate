@@ -1,6 +1,7 @@
 import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:class_mate/widgets/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -42,7 +43,7 @@ class _SignUpState extends State<SignUp> {
         // Navigate to the home page and replace the current route
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ),
         );
         // Remove the previous routes from the stack
@@ -55,10 +56,48 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  Future<void> _handleGoogleSignUp() async {
+    setState(() => loading = true);
+
+    try {
+      // Sign out from Google first (if the user is already signed in)
+      await AuthenticationService().signOutGoogle();
+
+      // Sign up with Google
+      User? result = await AuthenticationService().registerWithGoogle();
+
+      // Dismiss the loading page
+      setState(() => loading = false);
+
+      if (result != null) {
+        // Navigate to the home page and replace the current route
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+        // Remove the previous routes from the stack
+        Navigator.of(context).removeRoute(
+          ModalRoute.of(context)!,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Error: Failed to register"),
+          ),
+        );
+      }
+    } catch (e) {
+      // Handle any exceptions that might occur during sign-out or sign-up
+      print("Error: $e");
+      setState(() => loading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             appBar: AppBar(
               title: const Text("Sign Up"),
@@ -217,10 +256,8 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(12.0)),
                           child: MaterialButton(
                             onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                print(emailCont.text);
-                                print(passCont.text);
-                              }
+                              setState(() => loading = true);
+                              await _handleGoogleSignUp();
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
