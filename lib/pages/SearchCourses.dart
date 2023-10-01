@@ -1,6 +1,8 @@
 import 'package:class_mate/Classes/Course.dart';
+import 'package:class_mate/Classes/Center.dart';
 import 'package:class_mate/services/firestore_service.dart';
 import 'package:class_mate/widgets/CourseItem.dart';
+import 'package:class_mate/widgets/CenterItem.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -55,30 +57,29 @@ class _SearchCoursesState extends State<SearchCourses> {
                       height: 1.2,
                     ),
                   ),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        border: InputBorder.none,
-                      ),
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.filter_list,
-                      color: Color(0xFF7BB4E3),
-                    ),
-                    onPressed: () {
-                      // Handle filter button press
-                    },
-                    // child: Image.asset(
-                    //   'assets/icon/bell.png',
-                    //   width: 24,
-                    //   height: 24,
-                    // ),
-                    //TODO: whose child is this???
-                  ),
+                  // Expanded(
+                  //   child: TextField(
+                  //     decoration: InputDecoration(
+                  //       hintText: 'Searchhh',
+                  //       border: InputBorder.none,
+                  //     ),
+                  //     style: Theme.of(context).textTheme.headlineSmall,
+                  //   ),
+                  // ),
+                  // IconButton(
+                  //   icon: const Icon(
+                  //     Icons.filter_list,
+                  //     color: Color(0xFF7BB4E3),
+                  //   ),
+                  //   onPressed: () {
+                  //     // Handle filter button press
+                  //   },
+                  //   // child: Image.asset(
+                  //   //   'assets/icon/bell.png',
+                  //   //   width: 24,
+                  //   //   height: 24,
+                  //   // ),
+                  // ),
                 ],
               ),
               const SizedBox(height: 24.0),
@@ -151,33 +152,73 @@ class _SearchCoursesState extends State<SearchCourses> {
                         } else {
                           final courses = snapshot.data;
 
-                          return _isCoursesSelected
-                              ? Column(
-                                  children: [
-                                    SizedBox(
-                                      height: screenHeight / 1.7, //!
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: courses!.length,
-                                        itemBuilder: (context, index) {
-                                          final course = courses[index];
-                                          return CourseItem(
-                                            courseName: course.courseName,
-                                            courseCode: course.courseCode,
-                                            courseID: course.courseID,
-                                          );
-                                        },
-                                        // physics:
-                                        //     const AlwaysScrollableScrollPhysics(), // Set this property
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : const Text('Centers Content');
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: screenHeight / 1.7, //!
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: courses!.length,
+                                  itemBuilder: (context, index) {
+                                    final course = courses[index];
+                                    return CourseItem(
+                                      courseName: course.courseName,
+                                      courseCode: course.courseCode,
+                                      courseID: course.courseID,
+                                    );
+                                  },
+                                  // physics:
+                                  //     const AlwaysScrollableScrollPhysics(), // Set this property
+                                ),
+                              ),
+                            ],
+                          );
                         }
                       },
                     )
-                  : const Text('Centers Content'),
+                  : FutureBuilder<List<CenterOBJ>>(
+                      future: firestoreService.getAllCenters(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child:
+                                  CircularProgressIndicator()); // Show a loading indicator while fetching data
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Text(
+                              'No centers available.'); // Handle the case when no courses are available
+                        } else {
+                          final centers = snapshot.data;
+
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: screenHeight / 1.7, //!
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: centers!.length,
+                                  itemBuilder: (context, index) {
+                                    final center = centers[index];
+                                    return CenterItem(
+                                      centerName: center.centerName,
+                                      centerID: center.centerID,
+                                      contactEmail: center.contactEmail,
+                                      contactPhone: center.contactPhone,
+                                      location: center.location,
+                                    );
+                                  },
+                                  // physics:
+                                  //     const AlwaysScrollableScrollPhysics(), // Set this property
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
+                    )
             ],
           ),
         ),
