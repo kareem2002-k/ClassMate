@@ -81,94 +81,92 @@ class SettingsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Container(
-              child: Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Profile Tab
-                    InkWell(
-                      onTap: () {
-                        // Navigate to the ProfilePage
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ProfilePage(),
-                          ),
-                        ); // Handle the row tap action here
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.person_outline),
-                            ),
-                            const SizedBox(width: 20),
-                            const Text("Profile"),
-                            const Spacer(),
-                            const Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(Icons.navigate_next)),
-                          ],
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Profile Tab
+                  InkWell(
+                    onTap: () {
+                      // Navigate to the ProfilePage
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
                         ),
+                      ); // Handle the row tap action here
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            child: const Icon(Icons.person_outline),
+                          ),
+                          const SizedBox(width: 20),
+                          const Text("Profile"),
+                          const Spacer(),
+                          const Align(
+                              alignment: Alignment.centerRight,
+                              child: Icon(Icons.navigate_next)),
+                        ],
                       ),
                     ),
+                  ),
 
-                    // Settings Tab
-                    InkWell(
-                      onTap: () {
-                        // Handle the row tap action here
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SettingPage(),
+                  // Settings Tab
+                  InkWell(
+                    onTap: () {
+                      // Handle the row tap action here
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const SettingPage(),
+                        ),
+                      ); // Handle the row tap action here
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            child: const Icon(Icons.settings),
                           ),
-                        ); // Handle the row tap action here
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.settings),
-                            ),
-                            const SizedBox(width: 20),
-                            const Text("Settings"),
-                            const Spacer(),
-                            const Icon(Icons
-                                .navigate_next), // TODO: navigate to settings page
-                          ],
-                        ),
+                          const SizedBox(width: 20),
+                          const Text("Settings"),
+                          const Spacer(),
+                          const Icon(Icons
+                              .navigate_next), // TODO: navigate to settings page
+                        ],
                       ),
                     ),
-                    // About Tab
-                    InkWell(
-                      onTap: () {
-                        // Handle the row tap action here
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.info),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            const Text("About Us"),
-                            const Spacer(),
-                            const Icon(Icons.navigate_next),
-                          ],
-                        ),
+                  ),
+                  // About Tab
+                  InkWell(
+                    onTap: () {
+                      // Handle the row tap action here
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(30, 5, 16, 5),
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.grey[300],
+                            child: const Icon(Icons.info),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          const Text("About Us"),
+                          const Spacer(),
+                          const Icon(Icons.navigate_next),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
