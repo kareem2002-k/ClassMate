@@ -52,13 +52,6 @@ class AdminPanel extends StatelessWidget {
               // Handle Push Notification option
             },
           ),
-          ListTile(
-            leading: Icon(Icons.attach_file),
-            title: Text('Add Materials to Course'),
-            onTap: () {
-              // Handle Add Materials option
-            },
-          ),
         ],
       ),
     );

@@ -32,4 +32,20 @@ class AdminService {
       print(e);
     }
   }
+
+  Future EditCourse(String courseID, String courseName, String courseCode,
+      String courseDescription, String materials) async {
+    try {
+      final CollectionReference coursesCollection =
+          FirebaseFirestore.instance.collection('courses');
+      await coursesCollection.doc(courseID).update({
+        'courseName': courseName,
+        'courseCode': courseCode,
+        'courseDescription': courseDescription,
+        'materials': materials,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
 }

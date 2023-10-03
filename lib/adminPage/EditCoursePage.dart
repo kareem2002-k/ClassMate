@@ -34,6 +34,8 @@ class EditCoursePage extends StatelessWidget {
                     courseName: course.courseName,
                     courseCode: course.courseCode,
                     courseID: course.courseID,
+                    courseDescription: course.courseDescription,
+                    material: course.material,
                     // Add any other properties you want to display
                   );
                 },
@@ -50,12 +52,16 @@ class CustomCourseItem extends StatelessWidget {
   final String courseName;
   final String courseCode;
   final String courseID;
+  final String courseDescription;
+  final String material;
   final adminService = AdminService();
 
   CustomCourseItem({
     required this.courseName,
     required this.courseCode,
     required this.courseID,
+    required this.courseDescription,
+    required this.material,
   });
 
   @override
@@ -132,6 +138,8 @@ class CustomCourseItem extends StatelessWidget {
                                 courseCode: courseCode,
                                 courseName: courseName,
                                 courseID: courseID,
+                                courseDescription: courseDescription,
+                                material: material,
                               )),
                     );
                   },
