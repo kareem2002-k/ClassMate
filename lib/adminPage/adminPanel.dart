@@ -1,3 +1,4 @@
+import 'package:class_mate/adminPage/EditCoursePage.dart';
 import 'package:flutter/material.dart';
 import 'package:class_mate/adminPage/AddCoursePage.dart';
 import 'PushNotification.dart';
@@ -31,6 +32,12 @@ class AdminPanel extends StatelessWidget {
             title: Text('Edit Course'),
             onTap: () {
               // Handle Edit Course option
+              // navigate to AddCoursePage
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => EditCoursePage(),
+                ),
+              );
             },
           ),
           ListTile(
