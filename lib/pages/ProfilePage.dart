@@ -59,154 +59,145 @@ class _ProfilePageState extends State<ProfilePage> {
               //     },
               //   ),
               // ),
-              SafeArea(
-                child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0x6082AFC4), // Start color (with opacity)
-                        Color(0x50B4E7FF), // End color (with opacity)
-                      ],
-                    ),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                  child: SingleChildScrollView(
-                    // Wrap the Column with SingleChildScrollView
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 15),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: Text(
-                            "Name",
-                            style: TextStyle(fontSize: 18),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0x6082AFC4), // Start color (with opacity)
+                      Color(0x50B4E7FF), // End color (with opacity)
+                    ],
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 15),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Text(
+                        "Name",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: TextField(
+                        // controller: emailCont,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
+                          hintText: 'Enter your Name',
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: TextField(
-                            // controller: emailCont,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              hintText: 'Enter your Name',
-                            ),
-                            controller: _nameCont,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
+                        controller: _nameCont,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
 
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: Text(
-                            "Email",
-                            style: TextStyle(fontSize: 18),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Text(
+                        "Email",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: TextField(
+                        enabled: false,
+                        // controller: passCont,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
+                          hintText: '',
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: TextField(
-                            enabled: false,
-                            // controller: passCont,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              hintText: '',
-                            ),
-                            controller: _emailCont,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: Text(
-                            "University",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: TextField(
-                            // controller: passCont,
+                        controller: _emailCont,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Text(
+                        "University",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: TextField(
+                        // controller: passCont,
 
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              hintText: 'Ain shams',
-                            ),
-                            controller: _uniCont,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
-                        ), // Add spacing
-                        const SizedBox(height: 20),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: Text(
-                            "faculty",
-                            style: TextStyle(fontSize: 18),
-                          ),
+                          hintText: 'Ain shams',
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-                          child: TextField(
-                            // controller: passCont,
+                        controller: _uniCont,
+                      ),
+                    ), // Add spacing
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: Text(
+                        "Faculty",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                      child: TextField(
+                        // controller: passCont,
 
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              hintText: 'Engineering',
-                            ),
-                            controller: _facultyCont,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0),
                           ),
+                          hintText: 'Engineering',
                         ),
-                        const SizedBox(height: 10),
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: MaterialButton(
-                                onPressed: () async {
-                                  //  await _handleLogin();
-                                },
-                                child: const Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "update profile",
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
+                        controller: _facultyCont,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: MaterialButton(
+                            onPressed: () async {
+                              //  await _handleLogin();
+                            },
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Update Profile",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
-                      ],
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
               ),
             ],
