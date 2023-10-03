@@ -10,7 +10,6 @@ class PushNotification extends StatefulWidget {
 class _PushNotificationState extends State<PushNotification> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _selectedTopic = 'Topic 1';
-  String _notificationMessage = '';
 
   // List of predefined topics
   final List<String> _topics = ['Topic 1', 'Topic 2', 'Topic 3'];
@@ -19,7 +18,7 @@ class _PushNotificationState extends State<PushNotification> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Push Notifications'),
+        title: const Text('Push Notifications'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,7 +27,7 @@ class _PushNotificationState extends State<PushNotification> {
           child: Column(
             children: <Widget>[
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Select Topic',
                 ),
                 value: _selectedTopic,
@@ -44,9 +43,9 @@ class _PushNotificationState extends State<PushNotification> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Notification Message',
                 ),
                 validator: (value) {
@@ -55,14 +54,12 @@ class _PushNotificationState extends State<PushNotification> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  _notificationMessage = value!;
-                },
+                onSaved: (value) {},
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Send Notification'),
+                child: const Text('Send Notification'),
               ),
             ],
           ),

@@ -13,17 +13,34 @@ class FirestoreService {
   //current user
   String get currentUserId => _authenticationService.currentUser!.uid;
 
-  // get all courses
   Future<List<Course>> getAllCourses() async {
     try {
       final querySnapshot = await _firestore.collection('courses').get();
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
+        final courseName = data['courseName'] as String?; // Add null-check
+        final courseCode = data['courseCode'] as String?; // Add null-check
+        final courseDescription =
+            data['courseDescriptoin'] as String?; // Add null-check
+
+        if (courseName == null) {
+          print('Course Name is null for document ID: ${doc.id}');
+        }
+        if (courseCode == null) {
+          print('Course Code is null for document ID: ${doc.id}');
+        }
+        if (courseDescription == null) {
+          print('Course Description is null for document ID: ${doc.id}');
+        }
+
         return Course(
-          courseName: data['courseName'],
-          courseCode: data['courseCode'],
+          courseName: courseName ?? '', // Provide a default value if null
+          courseCode: courseCode ?? '', // Provide a default value if null
           courseID: doc.id,
           isFollowing: false,
+          courseDescription:
+              courseDescription ?? '', // Provide a default value if null
+          material: data['materials'],
         );
       }).toList();
     } catch (e) {
@@ -109,11 +126,29 @@ class FirestoreService {
 
       return querySnapshot.docs.map((doc) {
         final data = doc.data();
+        final courseName = data['courseName'] as String?; // Add null-check
+        final courseCode = data['courseCode'] as String?; // Add null-check
+        final courseDescription =
+            data['courseDescriptoin'] as String?; // Add null-check
+
+        if (courseName == null) {
+          print('Course Name is null for document ID: ${doc.id}');
+        }
+        if (courseCode == null) {
+          print('Course Code is null for document ID: ${doc.id}');
+        }
+        if (courseDescription == null) {
+          print('Course Description is null for document ID: ${doc.id}');
+        }
+
         return Course(
-          courseName: data['courseName'],
-          courseCode: data['courseCode'],
+          courseName: courseName ?? '', // Provide a default value if null
+          courseCode: courseCode ?? '', // Provide a default value if null
           courseID: doc.id,
           isFollowing: true,
+          courseDescription:
+              courseDescription ?? '', // Provide a default value if null
+          material: data['materials'],
         );
       }).toList();
     } catch (e) {
