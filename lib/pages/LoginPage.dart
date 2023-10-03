@@ -1,3 +1,4 @@
+import 'package:class_mate/pages/ForgotPassword.dart';
 import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:class_mate/widgets/loading.dart';
@@ -199,7 +200,23 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 50),
+                            const SizedBox(height: 5),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ForgotPasswordScreen(), // Replace with your CourseInfoScreen widget
+                                    ),
+                                  );
+                                },
+                                child: Text("Forgot Password?"),
+                              ),
+                            ),
+                            const SizedBox(height: 30),
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
