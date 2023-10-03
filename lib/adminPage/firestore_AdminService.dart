@@ -5,8 +5,8 @@ class AdminService {
   final CollectionReference _adminCollection =
       FirebaseFirestore.instance.collection('admin');
 
-  Future<void> addCourse(
-      String courseName, String courseCode, String courseDescription) async {
+  Future<void> addCourse(String courseName, String courseCode,
+      String courseDescription, String materials) async {
     try {
       final CollectionReference coursesCollection =
           FirebaseFirestore.instance.collection('courses');
@@ -16,7 +16,7 @@ class AdminService {
         'courseDescription': courseDescription,
         'faculty': 'Engineering',
         'university': 'Ain Shams',
-        'materials': [],
+        'materials': materials,
       });
     } catch (e) {
       print(e);

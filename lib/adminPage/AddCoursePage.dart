@@ -9,25 +9,26 @@ class AddCoursePage extends StatefulWidget {
 }
 
 class _AddCoursePageState extends State<AddCoursePage> {
-  final adminService = AdminService(); // Create an instance of AdminService
+  final adminService = AdminService();
 
-  // Create controllers for the text form fields
   final _courseCodeController = TextEditingController();
   final _courseNameController = TextEditingController();
   final _courseDescriptionController = TextEditingController();
   final _facultyController = TextEditingController();
   final _universityController = TextEditingController();
+  final _materialsController =
+      TextEditingController(); // Add materials controller
 
-  bool _isLoading = false; // Flag to track loading state
+  bool _isLoading = false;
 
   @override
   void dispose() {
-    // Clean up the controllers when the widget is disposed
     _courseCodeController.dispose();
     _courseNameController.dispose();
     _courseDescriptionController.dispose();
     _facultyController.dispose();
     _universityController.dispose();
+    _materialsController.dispose(); // Dispose of materials controller
     super.dispose();
   }
 
@@ -39,7 +40,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
       ),
       body: _isLoading
           ? const Center(
-              child: CircularProgressIndicator(), // Show a loading indicator
+              child: CircularProgressIndicator(),
             )
           : Padding(
               padding: const EdgeInsets.all(16.0),
@@ -105,44 +106,53 @@ class _AddCoursePageState extends State<AddCoursePage> {
                       border: OutlineInputBorder(),
                     ),
                   ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: _materialsController,
+                    style: const TextStyle(color: Colors.black),
+                    decoration: const InputDecoration(
+                      labelText: 'Materials',
+                      labelStyle: TextStyle(color: Colors.black),
+                      hintText: 'Enter materials',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
                   const SizedBox(height: 32.0),
                   ElevatedButton(
                     onPressed: () async {
-                      // Handle form submission here
                       final courseCode = _courseCodeController.text;
                       final courseName = _courseNameController.text;
                       final courseDescription =
                           _courseDescriptionController.text;
                       final faculty = _facultyController.text;
                       final university = _universityController.text;
+                      final materials =
+                          _materialsController.text; // Get materials
 
-                      // Check if any of the required fields are empty
                       if (courseCode.isEmpty ||
                           courseName.isEmpty ||
                           courseDescription.isEmpty) {
-                        // Show an error message or handle the case where fields are empty
                         return;
                       }
 
                       setState(() {
-                        _isLoading = true; // Set loading state to true
+                        _isLoading = true;
                       });
 
-                      // Call the addCourse method to add the course to Firestore
                       await adminService.addCourse(
                         courseName,
                         courseCode,
                         courseDescription,
+
+                        materials, // Pass materials to the addCourse method
                       );
 
-                      // Optionally, you can navigate to another page or show a success message
                       setState(() {
-                        _isLoading = false; // Set loading state to false
+                        _isLoading = false;
                       });
 
-                      // ignore: use_build_context_synchronously
-                      Navigator.of(context)
-                          .pop(); // Go back to the previous page
+                      Navigator.of(context).pop();
                     },
                     child: const Text('Add Course'),
                   ),
