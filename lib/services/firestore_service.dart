@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:class_mate/Classes/Course.dart';
+import 'package:flutter/foundation.dart';
+import '../Classes/Center.dart';
 import 'authentication_service.dart';
 import 'notifications_service.dart';
 
@@ -11,21 +13,66 @@ class FirestoreService {
   //current user
   String get currentUserId => _authenticationService.currentUser!.uid;
 
-  // get all courses
   Future<List<Course>> getAllCourses() async {
     try {
       final querySnapshot = await _firestore.collection('courses').get();
       return querySnapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
+        final courseName = data['courseName'] as String?; // Add null-check
+        final courseCode = data['courseCode'] as String?; // Add null-check
+        final courseDescription =
+            data['courseDescriptoin'] as String?; // Add null-check
+
+        if (courseName == null) {
+          print('Course Name is null for document ID: ${doc.id}');
+        }
+        if (courseCode == null) {
+          print('Course Code is null for document ID: ${doc.id}');
+        }
+        if (courseDescription == null) {
+          print('Course Description is null for document ID: ${doc.id}');
+        }
+
         return Course(
-          courseName: data['courseName'],
-          courseCode: data['courseCode'],
+          courseName: courseName ?? '', // Provide a default value if null
+          courseCode: courseCode ?? '', // Provide a default value if null
           courseID: doc.id,
           isFollowing: false,
+          courseDescription:
+              courseDescription ?? '', // Provide a default value if null
+          material: data['materials'],
         );
       }).toList();
     } catch (e) {
-      print('Error fetching courses: $e');
+      if (kDebugMode) {
+        print('Error fetching courses: $e');
+      }
+      return [];
+    }
+  }
+
+  Future<List<CenterOBJ>> getAllCenters() async {
+    try {
+      final querySnapshot = await _firestore.collection('centers').get();
+      return querySnapshot.docs.map((doc) {
+        final data = doc.data();
+        //TODO : understand this
+        return CenterOBJ(
+          centerName: data['centerName'] ??
+              '', // Provide a default value if 'centerName' is null
+          centerID: doc.id,
+          contactEmail: data['contactEmail'] ??
+              '', // Provide a default value if 'contactEmail' is null
+          contactPhone: data['contactPhone'] ??
+              '', // Provide a default value if 'contactPhone' is null
+          location: data['location'] ??
+              '', // Provide a default value if 'location' is null
+        );
+      }).toList();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error fetching centers: $e');
+      }
       return [];
     }
   }
@@ -38,7 +85,9 @@ class FirestoreService {
 
       return userFollowing.contains(courseId);
     } catch (e) {
-      print('Error fetching user following data: $e');
+      if (kDebugMode) {
+        print('Error fetching user following data: $e');
+      }
       return false; // Handle the error and return false
     }
   }
@@ -58,7 +107,9 @@ class FirestoreService {
       }
       return []; // Return an empty list if user data doesn't exist or no following courses
     } catch (e) {
-      print('Error fetching user following data: $e');
+      if (kDebugMode) {
+        print('Error fetching user following data: $e');
+      }
       return []; // Handle the error and return an empty list
     }
   }
@@ -74,16 +125,36 @@ class FirestoreService {
           .get();
 
       return querySnapshot.docs.map((doc) {
-        final data = doc.data() as Map<String, dynamic>;
+        final data = doc.data();
+        final courseName = data['courseName'] as String?; // Add null-check
+        final courseCode = data['courseCode'] as String?; // Add null-check
+        final courseDescription =
+            data['courseDescriptoin'] as String?; // Add null-check
+
+        if (courseName == null) {
+          print('Course Name is null for document ID: ${doc.id}');
+        }
+        if (courseCode == null) {
+          print('Course Code is null for document ID: ${doc.id}');
+        }
+        if (courseDescription == null) {
+          print('Course Description is null for document ID: ${doc.id}');
+        }
+
         return Course(
-          courseName: data['courseName'],
-          courseCode: data['courseCode'],
+          courseName: courseName ?? '', // Provide a default value if null
+          courseCode: courseCode ?? '', // Provide a default value if null
           courseID: doc.id,
           isFollowing: true,
+          courseDescription:
+              courseDescription ?? '', // Provide a default value if null
+          material: data['materials'],
         );
       }).toList();
     } catch (e) {
-      print('Error fetching user following data: $e');
+      if (kDebugMode) {
+        print('Error fetching user following data: $e');
+      }
       return []; // Handle the error and return an empty list
     }
   }

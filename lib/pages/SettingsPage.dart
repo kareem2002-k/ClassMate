@@ -23,8 +23,10 @@ class SettingPage extends StatelessWidget {
               })
         ],
       ),
-      body: Center(
-        child: Text("Testing"),
+      body: const SingleChildScrollView(
+        child: Center(
+          child: Text("Testing"),
+        ),
       ),
     );
   }

@@ -1,7 +1,9 @@
 import 'package:class_mate/pages/HomeScreen.dart';
 import 'package:class_mate/services/authentication_service.dart';
 import 'package:class_mate/widgets/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,11 +20,83 @@ class _SignUpState extends State<SignUp> {
   var hidePass = true;
   var passIcons = const Icon(Icons.visibility_off);
   bool loading = false;
+  final GlobalKey<FlutterPwValidatorState> validatorKey =
+      GlobalKey<FlutterPwValidatorState>();
+
+  // Valid email domains
+  final List<String> allowedDomains = ['gmail.com', 'hotmail.com', 'yahoo.com'];
+
+  String? validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter a password';
+    }
+
+    final passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d).{8,}$');
+
+    if (!passwordRegExp.hasMatch(value)) {
+      String error = '';
+
+      if (value.length < 8) {
+        error += 'Password must be at least 8 characters long. ';
+      } else if (!value.contains(RegExp(r'[A-Z]'))) {
+        error += 'Password must contain at least one uppercase letter. ';
+      } else if (!value.contains(RegExp(r'\d'))) {
+        error += 'Password must contain at least one digit.';
+      }
+
+      return error.trim(); // Return the combined error message
+    }
+
+    return null; // Return null if the password is valid
+  }
+
+  String? validateName(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter a Name';
+    }
+
+    // Regular expression to match alphabetic characters only
+    final RegExp nameRegExp = RegExp(r'^[a-zA-Z]+$');
+
+    if (!nameRegExp.hasMatch(value)) {
+      return 'Name can only contain letters';
+    }
+
+    return null; // Return null if the name is valid
+  }
+
+  // Custom email validator
+  String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter an E-mail';
+    }
+
+    final emailParts = value.split('@');
+    if (emailParts.length != 2 || !allowedDomains.contains(emailParts[1])) {
+      return 'Enter a valid email address';
+    }
+
+    return null; // Return null if the email is valid
+  }
 
   Future<void> _handleSignUp() async {
     setState(() => loading = true);
 
     if (_formKey.currentState!.validate()) {
+      // Custom password validation
+      final password = passCont.text;
+      final passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*\d).{8,}$');
+
+      if (!passwordRegExp.hasMatch(password)) {
+        setState(() => loading = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Error: Password does not meet the criteria."),
+          ),
+        );
+        return;
+      }
+
       String? result = await AuthenticationService().signUp(
         emailCont.text,
         passCont.text,
@@ -42,7 +116,7 @@ class _SignUpState extends State<SignUp> {
         // Navigate to the home page and replace the current route
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ),
         );
         // Remove the previous routes from the stack
@@ -55,10 +129,48 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  Future<void> _handleGoogleSignUp() async {
+    setState(() => loading = true);
+
+    try {
+      // Sign out from Google first (if the user is already signed in)
+      await AuthenticationService().signOutGoogle();
+
+      // Sign up with Google
+      User? result = await AuthenticationService().registerWithGoogle();
+
+      // Dismiss the loading page
+      setState(() => loading = false);
+
+      if (result != null) {
+        // Navigate to the home page and replace the current route
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+        // Remove the previous routes from the stack
+        Navigator.of(context).removeRoute(
+          ModalRoute.of(context)!,
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Error: Failed to register"),
+          ),
+        );
+      }
+    } catch (e) {
+      // Handle any exceptions that might occur during sign-out or sign-up
+      print("Error: $e");
+      setState(() => loading = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             appBar: AppBar(
               title: const Text("Sign Up"),
@@ -82,8 +194,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                       child: TextFormField(
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter a Name' : null,
+                        validator: validateName,
                         controller: nameCont,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -103,8 +214,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                       child: TextFormField(
-                        validator: (val) =>
-                            val!.isEmpty ? 'Enter an E-mail' : null,
+                        validator: validateEmail,
                         controller: emailCont,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
@@ -124,9 +234,7 @@ class _SignUpState extends State<SignUp> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
                       child: TextFormField(
-                        validator: (val) => val!.length < 6
-                            ? 'Enter a password with length of 6+ chars'
-                            : null,
+                        validator: validatePassword,
                         obscureText: hidePass,
                         controller: passCont,
                         decoration: InputDecoration(
@@ -217,10 +325,8 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(12.0)),
                           child: MaterialButton(
                             onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                print(emailCont.text);
-                                print(passCont.text);
-                              }
+                              setState(() => loading = true);
+                              await _handleGoogleSignUp();
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -268,5 +374,13 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
           );
+  }
+
+  @override
+  void dispose() {
+    emailCont.dispose();
+    passCont.dispose();
+    nameCont.dispose();
+    super.dispose();
   }
 }

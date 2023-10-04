@@ -1,5 +1,5 @@
-import 'package:class_mate/widgets/CenterItem.dart';
 import 'package:flutter/material.dart';
+import 'package:class_mate/widgets/ScheduleItem.dart';
 
 class AvailableCenters extends StatefulWidget {
   final String courseID;
@@ -17,17 +17,17 @@ class _AvailableCentersState extends State<AvailableCenters> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CenterItem(
+            ScheduleItem(
                 centerID: "centerID",
                 centerName: "",
                 instructorName: "instructorName",
                 courseDate: "courseDate",
                 courseTime: "courseTime"),
-            CenterItem(
+            ScheduleItem(
                 centerID: "centerID",
                 centerName: "",
                 instructorName: "instructorName",
